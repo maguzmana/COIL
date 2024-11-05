@@ -1,17 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Perfil de Usuario
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-input formControlName="fullName" type="text"></ion-input>
+    </ion-item>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <ion-item>
+      <ion-label position="floating">Peso (kg)</ion-label>
+      <ion-input formControlName="weight" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Altura (cm)</ion-label>
+      <ion-input formControlName="height" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input formControlName="age" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Género</ion-label>
+      <ion-select formControlName="gender">
+        <ion-select-option value="male">Masculino</ion-select-option>
+        <ion-select-option value="female">Femenino</ion-select-option>
+        <ion-select-option value="other">Otro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Objetivo</ion-label>
+      <ion-input formControlName="goal" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nivel de actividad física</ion-label>
+      <ion-input formControlName="physicalActivityLevel" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Condiciones de salud</ion-label>
+      <ion-input formControlName="healthConditions" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nueva contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input formControlName="confirmPassword" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="loading">
+      {{ loading ? 'Actualizando...' : 'Actualizar Perfil' }}
+    </ion-button>
+  </form>
 </ion-content>

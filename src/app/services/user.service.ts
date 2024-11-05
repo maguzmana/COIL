@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +10,9 @@ import { Storage } from '@ionic/storage-angular';
 export class UserService {
   private TOKEN_KEY = 'auth_token';
   private _storage: Storage | null = null;
+  private apiUrl = environment.apiUrl; // Asegúrate de tener esta variable en tu archivo de entorno
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private http: HttpClient) {
     this.init();
   }
 
@@ -32,5 +36,21 @@ export class UserService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile`, { headers: this.getHeaders() });
+  }
+
+  updateProfile(profileData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update-profile`, profileData, { headers: this.getHeaders() });
   }
 }
