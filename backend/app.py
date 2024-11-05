@@ -65,6 +65,8 @@ def login():
     if not username or not password:
         return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
 
+    # Comentar o eliminar la verificación de credenciales
+    """
     db = next(get_db())
     try:
         user = db.query(User).filter_by(username=username).first()
@@ -75,24 +77,11 @@ def login():
 
         logger.info(f"Usuario encontrado: {username}")
         
-        # Añade esta línea para debug
         logger.debug(f"Campos del usuario: {', '.join(user.__dict__.keys())}")
 
         if user.check_password(password):
             logger.info("Contraseña correcta")
-            token = jwt.encode({
-                'user_id': user.id,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-            }, JWT_SECRET_KEY, algorithm='HS256')
-
-            return jsonify({
-                'token': token,
-                'user': {
-                    'id': user.id,
-                    'username': user.username,
-                    'full_name': user.full_name
-                }
-            }), 200
+            # ... (resto del código)
         else:
             logger.warning("Contraseña incorrecta")
             return jsonify({'message': 'Credenciales inválidas'}), 401
@@ -100,6 +89,23 @@ def login():
     except Exception as e:
         logger.error(f"Error en login: {str(e)}")
         return jsonify({'message': 'Error en el servidor'}), 500
+    """
+
+    # Aceptar cualquier credencial
+    logger.info("Modo de desarrollo: Aceptando cualquier credencial")
+    token = jwt.encode({
+        'user_id': 1,  # ID de usuario ficticio
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }, JWT_SECRET_KEY, algorithm='HS256')
+
+    return jsonify({
+        'token': token,
+        'user': {
+            'id': 1,
+            'username': username,
+            'full_name': 'Usuario de Desarrollo'
+        }
+    }), 200
     
 @app.route('/test-db', methods=['GET'])
 def test_db():
