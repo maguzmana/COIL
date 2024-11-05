@@ -1,7 +1,10 @@
+/* app-routing.module.ts */
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { OnboardingGuard } from './services/onboarding.guard';
+import { Tab3PageModule } from './tab3/tab3.module';
 
 const routes: Routes = [
   {
@@ -26,6 +29,10 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'tab3',
+    component: Tab3PageModule
   }
 ];
 
