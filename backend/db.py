@@ -1,71 +1,56 @@
-""" db.py """
-
-import psycopg2
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
-# Configuración de la base de datos local
-DATABASE_URL = 'postgresql://postgres:Coil2024@localhost:5432/myAppDB'
+# Cargar variables de entorno
+load_dotenv()
+# Configuración de la base de datos
+DATABASE_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+
+# Crear el motor de SQLAlchemy con opciones de conexión
+engine = create_engine(
+    DATABASE_URL,
+    echo=True,
+    pool_size=5,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=1800
+)
 
 # Crear el motor de SQLAlchemy
-engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
-db_session = Session()
+engine = create_engine(DATABASE_URL, echo=True)
+
+# Crear una fábrica de sesiones
+session_factory = sessionmaker(bind=engine)
+
+# Crear una sesión con ámbito
+db_session = scoped_session(session_factory)
+
+# Declarative Base para los modelos
 Base = declarative_base()
-
-def get_db_connection():
-    # Intenta conectarse a la base de datos en AWS
-    # try:
-    #     connection = psycopg2.connect(
-    #         host='database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com',
-    #         database='nombre_de_tu_base_de_datos',
-    #         user='coil',
-    #         password='Coil2024'
-    #     )
-    #     return connection
-    # except psycopg2.OperationalError as e:
-    #     print(f"Error de conexión: {e}")
-    #     return None
-    return None  # Esto asegurará que no intente conectarse a AWS.
-
-def insert_user_data(user_data):
-    conn = get_db_connection()
-    if conn is None:
-        return  # Maneja el error de conexión
-
-    cursor = conn.cursor()
-    try:
-        query = """
-        INSERT INTO users (username, full_name, weight, height, age, gender, goal, physical_activity_level, health_conditions)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """
-        cursor.execute(query, (
-            user_data['username'],
-            user_data['fullName'],
-            user_data['weight'],
-            user_data['height'],
-            user_data['age'],
-            user_data['gender'],
-            user_data['goal'],
-            user_data['physicalActivityLevel'],
-            ','.join(user_data['healthConditions'])
-        ))
-
-        conn.commit()
-    except Exception as e:
-        print(f"Error al insertar datos: {e}")
-    finally:
-        cursor.close()
-        conn.close()
+Base.query = db_session.query_property()
 
 def init_db():
-    Base.metadata.create_all(engine)  # Crear todas las tablas si no existen
+    # Importar todos los módulos que contienen modelos aquí
+    import models
+    Base.metadata.create_all(bind=engine)
+
+def get_db_session():
+    return db_session
+
+def close_db_session():
+    db_session.remove()
 
 if __name__ == "__main__":
-    connection = get_db_connection()
-    if connection:
-        print("Conexión exitosa.")
+    try:
+        # Intenta crear una conexión
+        connection = engine.connect()
+        print("Conexión exitosa a la base de datos.")
         connection.close()
-    else:
-        print("No se pudo conectar a la base de datos.")
+    except Exception as e:
+        print(f"Error al conectar a la base de datos: {e}")
+    finally:
+        # Siempre cierra la sesión
+        close_db_session()
