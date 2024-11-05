@@ -44,11 +44,14 @@ def register():
     username = data['username']
     password = data['password']
 
+    # Verificar si el usuario ya existe
     if db_session.query(User).filter_by(username=username).first():
         return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
+    # Encriptar la contraseña
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
+    # Crear nuevo usuario
     new_user = User(
         username=data['username'],
         full_name=data['fullName'],
@@ -59,7 +62,7 @@ def register():
         goal=data['goal'],
         physical_activity_level=float(data['physicalActivityLevel']),
         health_conditions=data['healthConditions'],
-        password_hash=hashed_password
+        password_hash=hashed_password  # Aquí se almacena el hash de la contraseña
     )
 
     try:
