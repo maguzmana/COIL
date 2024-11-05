@@ -1,9 +1,23 @@
+
+ion-content.custom-content {
+  background-color: #080d4f;
+  height: 100%;
+}
+
+.custom-content {
+  background-color: #080d4f !important; /* Fuerza el color de fondo */
+  height: 100%; /* Asegúrate de que ocupe toda la altura */
+}
+
+
 .login-container {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   
+  
+    
     ion-card {
       width: 100%;
       max-width: 400px;
@@ -38,3 +52,4 @@
       --border-radius: 10px;
     }
   }
+  
