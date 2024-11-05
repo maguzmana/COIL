@@ -23,10 +23,14 @@ class User(Base):
 
     # Puedes agregar un método para establecer la contraseña
     def set_password(self, password):
-        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        password_bytes = password.encode('utf-8')
+        salt = bcrypt.gensalt()
+        self.password = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
 
     def check_password(self, password):
-        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
+        password_bytes = password.encode('utf-8')
+        stored_password_bytes = self.password.encode('utf-8')
+        return bcrypt.checkpw(password_bytes, stored_password_bytes)
 
 class Activity(Base):
     __tablename__ = 'activities'

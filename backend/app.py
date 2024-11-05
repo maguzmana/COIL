@@ -1,50 +1,100 @@
+""" app.py """
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
-from db import get_db_session, init_db, close_db_session
-from models import User, Activity, Meal
-import bcrypt
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base, User, Activity, Meal
 import jwt
 import datetime
 import os
 from dotenv import load_dotenv
+import logging
+
+# Configurar logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 # Cargar variables de entorno
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Esto habilita CORS para todas las rutas
+CORS(app)
+
+# Configuración de la base de datos
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
+DB_NAME = os.getenv('DB_NAME')
+
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
+# Crear el engine de SQLAlchemy
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+# Crear las tablas
+Base.metadata.create_all(bind=engine)
 
 # Configuración de claves secretas
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 
-# Inicializar la base de datos
-init_db()
-
 # Configuración de OpenAI API
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-@app.before_request
-def before_request():
-    get_db_session()
+def get_db():
+    db = SessionLocal()
+    try:
+        return db
+    finally:
+        db.close()
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    close_db_session()
-
-@app.route('/ask', methods=['POST'])
-def ask():
+@app.route('/login', methods=['POST'])
+def login():
     data = request.get_json()
-    question = data.get('question')
+    username = data.get('username')
+    password = data.get('password')
 
-    # Lógica de ChatGPT
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=question,
-        max_tokens=150
-    )
-    return jsonify({"answer": response.choices[0].text.strip()})
+    logger.info(f"Intento de login para usuario: {username}")
+
+    if not username or not password:
+        return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
+
+    db = get_db()
+    try:
+        user = db.query(User).filter_by(username=username).first()
+        
+        if not user:
+            logger.warning(f"Usuario no encontrado: {username}")
+            return jsonify({'message': 'Credenciales inválidas'}), 401
+
+        logger.info(f"Usuario encontrado: {username}")
+        
+        if user.check_password(password):
+            logger.info("Contraseña correcta")
+            token = jwt.encode({
+                'user_id': user.id,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            }, JWT_SECRET_KEY, algorithm='HS256')
+
+            return jsonify({
+                'token': token,
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'full_name': user.full_name
+                }
+            }), 200
+        else:
+            logger.warning("Contraseña incorrecta")
+            return jsonify({'message': 'Credenciales inválidas'}), 401
+
+    except Exception as e:
+        logger.error(f"Error en login: {str(e)}")
+        return jsonify({'message': 'Error en el servidor'}), 500
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -58,90 +108,52 @@ def register():
     username = data['username']
     password = data['password']
 
-    session = get_db_session()
-    # Verificar si el usuario ya existe
-    if session.query(User).filter_by(username=username).first():
-        return jsonify({'message': 'El nombre de usuario ya existe'}), 400
-
-    # Crear nuevo usuario
-    new_user = User(
-        username=data['username'],
-        full_name=data['fullName'],
-        weight=float(data['weight']),
-        height=float(data['height']),
-        age=int(data['age']),
-        gender=data['gender'],
-        goal=data['goal'],
-        physical_activity_level=float(data['physicalActivityLevel']),
-        health_conditions=data['healthConditions']
-    )
-    new_user.set_password(password)
-
+    db = get_db()
     try:
-        session.add(new_user)
-        session.commit()
+        # Verificar si el usuario ya existe
+        if db.query(User).filter_by(username=username).first():
+            return jsonify({'message': 'El nombre de usuario ya existe'}), 400
+
+        # Crear nuevo usuario
+        new_user = User(
+            username=data['username'],
+            full_name=data['fullName'],
+            weight=float(data['weight']),
+            height=float(data['height']),
+            age=int(data['age']),
+            gender=data['gender'],
+            goal=data['goal'],
+            physical_activity_level=float(data['physicalActivityLevel']),
+            health_conditions=data['healthConditions']
+        )
+        new_user.set_password(password)
+
+        db.add(new_user)
+        db.commit()
         return jsonify({'message': 'Usuario registrado exitosamente'}), 201
     except Exception as e:
-        session.rollback()
+        db.rollback()
+        logger.error(f"Error en registro: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-
-    if not username or not password:
-        return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
-
-    session = get_db_session()
-    user = session.query(User).filter_by(username=username).first()
-
-    if user and user.check_password(password):
-        token = jwt.encode({
-            'user_id': user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-        }, JWT_SECRET_KEY, algorithm='HS256')
-
+@app.route('/test-connection', methods=['GET'])
+def test_connection():
+    logger.info("Probando conexión a la base de datos...")
+    try:
+        db = get_db()
+        users_count = db.query(User).count()
+        logger.info(f"Conexión exitosa. Número de usuarios: {users_count}")
         return jsonify({
-            'token': token,
-            'user': {
-                'id': user.id,
-                'username': user.username,
-                'full_name': user.full_name
-            }
+            'status': 'success',
+            'message': 'Conexión exitosa',
+            'users_count': users_count
         }), 200
-    else:
-        return jsonify({'message': 'Credenciales inválidas'}), 401
-
-@app.route('/activities', methods=['POST'])
-def add_activity():
-    data = request.get_json()
-    new_activity = Activity(
-        user_id=data['user_id'],
-        activity_type=data['activity_type'],
-        description=data['description'],
-        date=data['date'],
-    )
-    session = get_db_session()
-    session.add(new_activity)
-    session.commit()
-    return jsonify({'message': 'Actividad registrada exitosamente'}), 201
-
-@app.route('/meals', methods=['POST'])
-def add_meal():
-    data = request.get_json()
-    new_meal = Meal(
-        user_id=data['user_id'],
-        meal_type=data['meal_type'],
-        food_items=data['food_items'],
-        calories=data['calories'],
-        date=data['date'],
-    )
-    session = get_db_session()
-    session.add(new_meal)
-    session.commit()
-    return jsonify({'message': 'Comida registrada exitosamente'}), 201
+    except Exception as e:
+        logger.error(f"Error en la conexión: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': f'Error de conexión: {str(e)}'
+        }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
