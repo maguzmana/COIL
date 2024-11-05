@@ -1,4 +1,6 @@
+/* tab2.page.ts */
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -10,12 +12,17 @@ export class Tab2Page implements OnInit {
   userName: string = 'Nombre de usuario';
   dailyTip: string = 'Consejo diario de salud';
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
     // Inicializamos los valores
     this.userName = "Juan Carlos";  // Puedes cambiar este valor según corresponda
     this.dailyTip = "Come más frutas. Son ricas en fibra y te ayudarán a mantenerte saludable por más tiempo."; // Ejemplo de consejo diario
+  }
+
+  irAChatBot() {
+    // Navega a tab1 donde está el chat bot
+    this.navCtrl.navigateRoot('/tabs/tab1');
   }
 
 }
