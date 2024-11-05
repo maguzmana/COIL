@@ -49,46 +49,48 @@
         </div>
       </ion-item> 
 
-      <ion-item class="custom-item">
-        <ion-label>Género</ion-label>
-        <ion-select [(ngModel)]="user.gender" name="gender" required>
-          <ion-select-option value="male">Masculino</ion-select-option>
-          <ion-select-option value="female">Femenino</ion-select-option>
-          <ion-select-option value="other">Otro</ion-select-option>
-        </ion-select>
-      </ion-item>
+     <ion-item class="custom-item centered-select-container">
+  <ion-label>Género</ion-label>
+  <ion-select [(ngModel)]="user.gender" name="gender" required>
+    <ion-select-option value="male">Masculino</ion-select-option>
+    <ion-select-option value="female">Femenino</ion-select-option>
+    <ion-select-option value="other">Otro</ion-select-option>
+  </ion-select>
+</ion-item>
 
-      <ion-item class="custom-item">
-        <ion-label>Objetivo</ion-label>
-        <ion-select [(ngModel)]="user.goal" name="goal" required>
-          <ion-select-option value="loseWeight">Perder peso</ion-select-option>
-          <ion-select-option value="gainMuscle">Ganar músculo</ion-select-option>
-          <ion-select-option value="stayFit">Mantenerme en forma</ion-select-option>
-        </ion-select>
-      </ion-item>
+<ion-item class="custom-item centered-select-container">
+  <ion-label>Objetivo</ion-label>
+  <ion-select [(ngModel)]="user.goal" name="goal" required>
+    <ion-select-option value="loseWeight">Perder peso</ion-select-option>
+    <ion-select-option value="gainMuscle">Ganar músculo</ion-select-option>
+    <ion-select-option value="stayFit">Mantenerme en forma</ion-select-option>
+  </ion-select>
+</ion-item>
 
-      <ion-item class="custom-item">
-        <ion-label>Nivel de actividad física</ion-label>
-        <ion-select [(ngModel)]="user.physicalActivityLevel" (ionChange)="onNumberInput($event, 'physicalActivityLevel')" name="physicalActivityLevel" required>
-          <ion-select-option [value]="1.2">Sedentario</ion-select-option>
-          <ion-select-option [value]="1.375">Ligeramente activo</ion-select-option>
-          <ion-select-option [value]="1.55">Moderadamente activo</ion-select-option>
-          <ion-select-option [value]="1.725">Muy activo</ion-select-option>
-          <ion-select-option [value]="1.9">Extremadamente activo</ion-select-option>
-        </ion-select>
-      </ion-item>
+<ion-item class="custom-item centered-select-container">
+  <ion-label>Nivel de actividad física</ion-label>
+  <ion-select [(ngModel)]="user.physicalActivityLevel" name="physicalActivityLevel" required>
+    <ion-select-option [value]="1.2">Sedentario</ion-select-option>
+    <ion-select-option [value]="1.375">Ligeramente activo</ion-select-option>
+    <ion-select-option [value]="1.55">Moderadamente activo</ion-select-option>
+    <ion-select-option [value]="1.725">Muy activo</ion-select-option>
+    <ion-select-option [value]="1.9">Extremadamente activo</ion-select-option>
+  </ion-select>
+</ion-item>
 
-      <ion-item class="custom-item">
-        <ion-label>Condiciones de salud</ion-label>
-        <ion-select [(ngModel)]="user.healthConditions" name="healthConditions" multiple="true">
-          <ion-select-option value="diabetes">Diabetes</ion-select-option>
-          <ion-select-option value="hypertension">Hipertensión</ion-select-option>
-          <ion-select-option value="heartDisease">Enfermedad cardíaca</ion-select-option>
-          <ion-select-option value="none">Ninguna</ion-select-option>
-        </ion-select>
-      </ion-item>
+<ion-item class="custom-item centered-select-container">
+  <ion-label>Condiciones de salud</ion-label>
+  <ion-select [(ngModel)]="user.healthConditions" name="healthConditions" multiple="true">
+    <ion-select-option value="diabetes">Diabetes</ion-select-option>
+    <ion-select-option value="hypertension">Hipertensión</ion-select-option>
+    <ion-select-option value="heartDisease">Enfermedad cardíaca</ion-select-option>
+    <ion-select-option value="none">Ninguna</ion-select-option>
+  </ion-select>
+</ion-item>
+<div class="button-container">
+  <ion-button expand="block" type="submit" class="register-button">Registrar</ion-button>
+</div>
 
-      <ion-button expand="block" type="submit" class="register-button">Registrar</ion-button>
     </form>
 
     <ion-button expand="full" fill="clear" (click)="goToLogin()">¿Ya tienes una cuenta? Inicia sesión</ion-button>

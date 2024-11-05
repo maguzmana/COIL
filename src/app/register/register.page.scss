@@ -6,33 +6,37 @@ body {
     height: 100vh;
 }
 
-.slide-image[_ngcontent-ng-c736496235] {
-    max-width: 70%;
-    height: auto;
-    border-radius: 4px;
-    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
-    margin-top: -13px;
-    margin-bottom: 63px;
-    
-  }
+.form-container {
+    margin-top: 10px; /* Ajusta este valor según la distancia que quieras desde la parte superior */
 
-  .image-container img {
-    position: relative; /* Para asegurar que la imagen esté debajo del degradado */
-    z-index: 0; /* La imagen está debajo del degradado */
+}
+
+
+ion-content {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  
-  .slide-image {
-    max-width: 25%;
-      height: auto;
-      border-radius: 8px;
-      filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
-      margin-bottom: 78px;
-      margin-top: 5px;
-  }
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    width: 100%;
+}
+
+.slide-image {
+    max-width: 30%; /* Ajusta el ancho de la imagen */
+    height: auto;
+    border-radius: 8px;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
   
 
 h2 {
@@ -49,23 +53,14 @@ ion-content {
     height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
 }
 
-.form-container {
-    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
-    max-width: 400px; /* Establece un ancho máximo para el formulario */
-    padding: 20px; /* Agrega un poco de espacio interno */
-}
+
 
 ion-item {
     width: 100%; /* Cada ion-item ocupa todo el ancho */
     margin-bottom: 15px; /* Espacio entre los elementos */
 }
 
-.register-button {
-    margin-top: 20px; /* Espacio superior para separación */
-    align-self: center; /* Centra el botón dentro de su contenedor */
-    width: 80%; /* Ajusta el ancho según sea necesario */
-    max-width: 300px; /* Ancho máximo para el botón */
-}
+
 
 .input-container[_ngcontent-ng-c648470614] {
     background: #ffffff; /* Fondo blanco para el campo de entrada */
@@ -75,13 +70,6 @@ ion-item {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
-.custom-item {
-    width: 100%; /* Ocupa todo el ancho */
-    --background: transparent; /* Fondo transparente en el ion-item */
-    --padding-start: 0;
-    --padding-end: 0;
-    margin: 10px 0; /* Espaciado entre items */
-}
 
 .input-container {
     background: #ffffff; /* Fondo blanco */
@@ -97,22 +85,33 @@ ion-item {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px; /* Separación del input */
+    text-align: center;
 }
 
-ion-button {
-    margin-top: 20px; /* Ajuste para margen superior */
+.custom-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    text-align: center; /* Centra el texto */
 }
 
-ion-button.register-button {
-    margin-top: 20px; /* Cambiado a 20px para separar más del texto anterior */
-    margin-bottom: 10px; /* Ajustado para espacio adecuado */
+/* Centrado del contenedor del botón */
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%; /* Abarca el ancho del contenedor */
+}
+
+/* Ajuste de estilo para el botón */
+.register-button {
+    margin-top: 20px; /* Espacio superior para separación */
+    width: 80%; /* Ajusta el ancho del botón */
+    max-width: 300px; /* Ancho máximo para el botón */
     --background: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(255, 255, 255, 0.5);
-    --border-radius: 20px; /* Bordes redondeados para el botón ovalado */
+    --border-radius: 20px; /* Bordes redondeados */
     color: white;
     font-weight: bold;
-    width: 80%; /* Ancho del botón */
-    max-width: 300px; /* Ancho máximo para el botón */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra */
     text-transform: none;
 }
