@@ -1,24 +1,38 @@
 body {
-    background-color: #1a1a2e; /* Color de fondo oscuro */
+    
+    
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
 }
 
-.form-container {
-    margin-top: 10px; /* Ajusta este valor según la distancia que quieras desde la parte superior */
-
-}
-
-
 ion-content {
+    
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centra verticalmente */
     align-items: center; /* Centra horizontalmente */
     height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
+    padding: 16px; /* Espaciado interno */
 }
+
+.custom-content {
+ --background: #080d4f; /* Color de fondo del contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
+    padding: 16px;
+}
+
+
+.form-container {
+    margin-top: 10px; /* Ajusta este valor según la distancia que quieras desde la parte superior */
+    
+}
+
 
 .image-container {
     display: flex;
@@ -28,7 +42,7 @@ ion-content {
 }
 
 .slide-image {
-    max-width: 30%; /* Ajusta el ancho de la imagen */
+    max-width: 18%; /* Ajusta el ancho de la imagen */
     height: auto;
     border-radius: 8px;
     filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
@@ -41,11 +55,12 @@ ion-content {
 
 h2 {
     margin-top: 18px;
-    font-size: 29px;
+    font-size: 23px;
     text-align: center;
   }
 
 ion-content {
+    background-color: #080d4f;  /* Color de fondo del contenido */
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centra verticalmente */
