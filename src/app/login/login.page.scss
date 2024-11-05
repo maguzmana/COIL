@@ -1,7 +1,7 @@
-
 ion-content.custom-content {
   background-color: #080d4f;
   height: 100%;
+  --ion-background-color: #080d4f;
 }
 
 .custom-content {
@@ -9,47 +9,66 @@ ion-content.custom-content {
   height: 100%; /* Asegúrate de que ocupe toda la altura */
 }
 
-
 .login-container {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #3a3a3a; /* Fondo de la tarjeta cambiado a gris */
+}
+
+ion-card-header {
+  text-align: center;
+  padding: 20px;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+}
+
+ion-card-subtitle {
+  margin-top: 10px;
+  color: #bbbbbb;
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 15px;
+}
+
+
+/* Centrado del contenedor del botón */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  width: 100%; /* Abarca el ancho del contenedor */
+}
+
+ion-button[type="submit"] {
   
-  
-    
-    ion-card {
-      width: 100%;
-      max-width: 400px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-  
-    ion-card-header {
-      text-align: center;
-      padding: 20px;
-  
-      ion-card-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: var(--ion-color-primary);
-      }
-  
-      ion-card-subtitle {
-        margin-top: 10px;
-      }
-    }
-  
-    ion-item {
-      --padding-start: 0;
-      --inner-padding-end: 0;
-      margin-bottom: 15px;
-    }
-  
-    ion-button[type="submit"] {
-      margin-top: 20px;
-      --border-radius: 10px;
-    }
-  }
-  
+  margin-top: 20px; /* Espacio superior para separación */
+  width: 80%; /* Ajusta el ancho del botón */
+  max-width: 300px; /* Ancho máximo para el botón */
+  --background: rgba(255, 255, 255, 0.1);
+  --border-radius: 20px; /* Bordes redondeados */
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra */
+  text-transform: none;
+}
+
+ion-checkbox {
+  --background: #3a3a3a; /* Fondo del checkbox */
+  --color-checked: #6c63ff; /* Color cuando está marcado */
+}
