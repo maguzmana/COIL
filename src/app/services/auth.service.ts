@@ -1,3 +1,5 @@
+/* auth.service.ts */
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Agregado HttpHeaders
 import { Observable } from 'rxjs';
