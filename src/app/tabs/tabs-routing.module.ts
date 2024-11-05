@@ -10,6 +10,18 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'inicio',
+        loadChildren: () => import('../inicio/inicio.module').then(m => m.InicioPageModule)
+      },
+      {
+        path: 'progreso',
+        loadChildren: () => import('../progreso/progreso.module').then(m => m.ProgresoPageModule)
+      },
+      {
+        path: 'favoritos',
+        loadChildren: () => import('../favoritos/favoritos.module').then(m => m.FavoritosPageModule)
+      },
+      {
         path: 'tab1',
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
@@ -23,10 +35,15 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'tab2',
+        redirectTo: 'inicio',
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/inicio',
+    pathMatch: 'full'
   }
 ];
 

@@ -33,7 +33,19 @@ const routes: Routes = [
   {
     path: 'tab3',
     component: Tab3PageModule
+  },  {
+    path: 'inicio',
+    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
+    path: 'progreso',
+    loadChildren: () => import('./progreso/progreso.module').then( m => m.ProgresoPageModule)
+  },
+  {
+    path: 'favoritos',
+    loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   }
+
 ];
 
 @NgModule({

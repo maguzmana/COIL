@@ -1,0 +1,37 @@
+// favoritos.page.scss
+ion-thumbnail {
+    --size: 80px;
+    margin: 10px;
+  }
+  
+  ion-list-header {
+    background: var(--ion-color-light);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  ion-list-header h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+  }
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+  
+  ion-card {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  ion-segment {
+    background: var(--ion-color-light);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  ion-segment-button {
+    --indicator-color: var(--ion-color-primary);
+  }
