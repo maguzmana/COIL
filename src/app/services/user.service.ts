@@ -1,86 +1,36 @@
-/* user.service.ts */
-
 import { Injectable } from '@angular/core';
-
-interface User {
-  fullName: string;
-  username: string;
-  weight: number | null;
-  height: number | null;
-  age: number | null;
-  gender: string;
-  goal: string;
-  physicalActivityLevel: number | null;
-  healthConditions: string[];
-}
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private token: string | null = null;
-  private currentUser: User | null = null;
+  private TOKEN_KEY = 'auth_token';
+  private _storage: Storage | null = null;
 
-  constructor() {
-    // Intentar recuperar el token y el usuario del localStorage al iniciar el servicio
-    this.token = localStorage.getItem('token');
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      this.currentUser = JSON.parse(savedUser);
+  constructor(private storage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    if (this._storage === null) {
+      this._storage = await this.storage.create();
     }
   }
 
-  setToken(token: string) {
-    this.token = token;
-    localStorage.setItem('token', token);
+  async setToken(token: string) {
+    await this._storage?.set(this.TOKEN_KEY, token);
   }
 
-  getToken(): string | null {
-    return this.token || localStorage.getItem('token');
+  async getToken(): Promise<string | null> {
+    return await this._storage?.get(this.TOKEN_KEY) || null;
   }
 
-  setUser(user: User) {
-    this.currentUser = user;
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  getUser(): User | null {
-    return this.currentUser;
-  }
-
-  clearUserData() {
-    this.token = null;
-    this.currentUser = null;
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+  async removeToken() {
+    await this._storage?.remove(this.TOKEN_KEY);
   }
 
   isAuthenticated(): boolean {
     return !!this.getToken();
-  }
-
-  updateUserProfile(userData: Partial<User>) {
-    if (this.currentUser) {
-      this.currentUser = { ...this.currentUser, ...userData };
-      localStorage.setItem('user', JSON.stringify(this.currentUser));
-    }
-  }
-
-  // Método para actualizar datos específicos del usuario
-  updateUserMetrics(weight: number, height: number) {
-    if (this.currentUser) {
-      this.currentUser.weight = weight;
-      this.currentUser.height = height;
-      localStorage.setItem('user', JSON.stringify(this.currentUser));
-    }
-  }
-
-  // Método para obtener el IMC del usuario
-  calculateBMI(): number | null {
-    if (this.currentUser?.weight && this.currentUser?.height) {
-      const heightInMeters = this.currentUser.height / 100;
-      return this.currentUser.weight / (heightInMeters * heightInMeters);
-    }
-    return null;
   }
 }

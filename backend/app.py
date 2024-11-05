@@ -6,15 +6,24 @@ from models import User, Activity, Meal
 import bcrypt
 import jwt
 import datetime
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Esto habilita CORS para todas las rutas
+
+# Configuración de claves secretas
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 
 # Inicializar la base de datos
 init_db()
 
 # Configuración de OpenAI API
-openai.api_key = "sk-your-api-key"  # Cambia esto por tu clave real
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @app.before_request
 def before_request():
@@ -54,9 +63,6 @@ def register():
     if session.query(User).filter_by(username=username).first():
         return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
-    # Encriptar la contraseña
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-
     # Crear nuevo usuario
     new_user = User(
         username=data['username'],
@@ -67,9 +73,9 @@ def register():
         gender=data['gender'],
         goal=data['goal'],
         physical_activity_level=float(data['physicalActivityLevel']),
-        health_conditions=data['healthConditions'],
-        password_hash=hashed_password
+        health_conditions=data['healthConditions']
     )
+    new_user.set_password(password)
 
     try:
         session.add(new_user)
@@ -91,13 +97,20 @@ def login():
     session = get_db_session()
     user = session.query(User).filter_by(username=username).first()
 
-    if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
+    if user and user.check_password(password):
         token = jwt.encode({
             'user_id': user.id,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-        }, "your_secret_key", algorithm='HS256')
+        }, JWT_SECRET_KEY, algorithm='HS256')
 
-        return jsonify({'token': token}), 200
+        return jsonify({
+            'token': token,
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'full_name': user.full_name
+            }
+        }), 200
     else:
         return jsonify({'message': 'Credenciales inválidas'}), 401
 

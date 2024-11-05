@@ -1,3 +1,5 @@
+/* onboarding.page.ts */
+
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swiper from 'swiper';

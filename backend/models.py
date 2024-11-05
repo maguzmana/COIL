@@ -1,3 +1,4 @@
+""" models.py """
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Date, Float
 from sqlalchemy.orm import relationship
 from db import Base
@@ -24,8 +25,8 @@ class User(Base):
     def set_password(self, password):
         self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-    def __repr__(self):
-        return f"<User   (username={self.username}, full_name={self.full_name})>"
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 
 class Activity(Base):
     __tablename__ = 'activities'

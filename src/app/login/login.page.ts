@@ -1,8 +1,11 @@
+/* login.page.ts */
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -36,10 +39,18 @@ export class LoginPage {
     await loading.present();
 
     try {
-      const response: any = await this.http.post('http://localhost:5000/login', this.credentials).toPromise();
+      const response: any = await this.http.post(`${environment.apiUrl}/login`, this.credentials).toPromise();
       this.userService.setToken(response.token);
       await loading.dismiss();
-      this.router.navigate(['/home']);
+      
+      // Verificar si es el primer inicio de sesión
+      const isFirstLogin = response.isFirstLogin || false;
+
+      if (isFirstLogin) {
+        this.router.navigate(['/onboarding']);
+      } else {
+        this.router.navigate(['/tabs/tab2']);
+      }
     } catch (error) {
       await loading.dismiss();
       await this.showAlert('Error', 'Usuario o contraseña incorrectos');
