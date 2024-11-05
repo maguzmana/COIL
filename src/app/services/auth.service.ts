@@ -1,10 +1,12 @@
+/* auth.service.ts */
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Agregado HttpHeaders
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 // Interfaces para tipar los datos
-export interface RegisterUser {
+export interface RegisterUser  {
   fullName: string;
   username: string;
   password: string;
@@ -17,7 +19,7 @@ export interface RegisterUser {
   healthConditions: string[];
 }
 
-export interface LoginUser {
+export interface LoginUser  {
   username: string;
   password: string;
 }
@@ -37,7 +39,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(userData: RegisterUser): Observable<AuthResponse> {
+  register(userData: RegisterUser ): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -48,7 +50,7 @@ export class AuthService {
       );
   }
 
-  login(loginData: LoginUser): Observable<AuthResponse> {
+  login(loginData: LoginUser ): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
