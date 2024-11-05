@@ -1,6 +1,7 @@
 """ models.py """
 from sqlalchemy import Column, Integer, String, Text, ForeignKey, Date, Float
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 from db import Base
 import bcrypt
 
@@ -12,6 +13,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)  # Asegúrate de que esto esté presente
     full_name = Column(String(100), nullable=False)
     username = Column(String(50), unique=True, nullable=False)
+    password = Column(String(128), nullable=False)
     weight = Column(Float, nullable=False)
     height = Column(Float, nullable=False)
     age = Column(Integer, nullable=False)

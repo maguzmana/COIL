@@ -1,12 +1,11 @@
-/* auth.service.ts */
-
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; // Agregado HttpHeaders
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment'; // Asegúrate de que la ruta sea correcta
 
 // Interfaces para tipar los datos
-export interface RegisterUser  {
+export interface RegisterUser {
   fullName: string;
   username: string;
   password: string;
@@ -19,7 +18,7 @@ export interface RegisterUser  {
   healthConditions: string[];
 }
 
-export interface LoginUser  {
+export interface LoginUser {
   username: string;
   password: string;
 }
@@ -34,28 +33,40 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:5000';
+  private apiUrl = environment.apiUrl;
   private token: string | null = null;
 
   constructor(private http: HttpClient) {}
 
-  register(userData: RegisterUser ): Observable<AuthResponse> {
+  register(userData: RegisterUser): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData, { headers })
       .pipe(
-        tap(response => console.log('Respuesta del servidor:', response))
+        tap(response => {
+          console.log('Respuesta del servidor:', response);
+          if (response.token) {
+            this.setToken(response.token);
+          }
+        })
       );
   }
 
-  login(loginData: LoginUser ): Observable<AuthResponse> {
+  login(loginData: LoginUser): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData, { headers });
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData, { headers })
+      .pipe(
+        tap(response => {
+          if (response.token) {
+            this.setToken(response.token);
+          }
+        })
+      );
   }
 
   getToken(): string | null {

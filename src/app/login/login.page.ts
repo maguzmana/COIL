@@ -1,11 +1,7 @@
-/* login.page.ts */
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { UserService } from '../services/user.service';
 import { LoadingController, AlertController } from '@ionic/angular';
-import { environment } from '../../environments/environment';
+import { AuthService } from '../services/auth.service'; // Cambia esto por la ruta correcta
 
 @Component({
   selector: 'app-login',
@@ -19,9 +15,8 @@ export class LoginPage {
   };
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService, // Usa AuthService en lugar de UserService
     private router: Router,
-    private http: HttpClient,
     private loadingController: LoadingController,
     private alertController: AlertController
   ) {}
@@ -39,22 +34,26 @@ export class LoginPage {
     await loading.present();
 
     try {
-      const response: any = await this.http.post(`${environment.apiUrl}/login`, this.credentials).toPromise();
-      this.userService.setToken(response.token);
-      await loading.dismiss();
-      
-      // Verificar si es el primer inicio de sesión
-      const isFirstLogin = response.isFirstLogin || false;
-
-      if (isFirstLogin) {
-        this.router.navigate(['/onboarding']);
-      } else {
-        this.router.navigate(['/tabs/tab2']);
-      }
+      this.authService.login(this.credentials).subscribe(
+        (response: any) => {
+          loading.dismiss();
+          if (response.token) {
+            this.authService.setToken(response.token);
+            this.router.navigate(['/tabs/tab2']);
+          } else {
+            this.showAlert('Error', 'Respuesta inválida del servidor');
+          }
+        },
+        async (error) => {
+          loading.dismiss();
+          console.error('Error al iniciar sesión:', error);
+          await this.showAlert('Error', 'Usuario o contraseña incorrectos');
+        }
+      );
     } catch (error) {
-      await loading.dismiss();
-      await this.showAlert('Error', 'Usuario o contraseña incorrectos');
+      loading.dismiss();
       console.error('Error al iniciar sesión:', error);
+      await this.showAlert('Error', 'Ocurrió un error al intentar iniciar sesión');
     }
   }
 

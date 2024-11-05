@@ -9,8 +9,10 @@ from models import Base, User, Activity, Meal
 import jwt
 import datetime
 import os
+from sqlalchemy import text
 from dotenv import load_dotenv
 import logging
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Configurar logging
 logging.basicConfig(level=logging.DEBUG)
@@ -20,7 +22,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://localhost:8100"]}})
 
 # Configuración de la base de datos
 DB_USER = os.getenv('DB_USER')
@@ -48,7 +50,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 def get_db():
     db = SessionLocal()
     try:
-        return db
+        yield db
     finally:
         db.close()
 
@@ -63,7 +65,7 @@ def login():
     if not username or not password:
         return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
 
-    db = get_db()
+    db = next(get_db())
     try:
         user = db.query(User).filter_by(username=username).first()
         
@@ -73,6 +75,9 @@ def login():
 
         logger.info(f"Usuario encontrado: {username}")
         
+        # Añade esta línea para debug
+        logger.debug(f"Campos del usuario: {', '.join(user.__dict__.keys())}")
+
         if user.check_password(password):
             logger.info("Contraseña correcta")
             token = jwt.encode({
@@ -95,6 +100,24 @@ def login():
     except Exception as e:
         logger.error(f"Error en login: {str(e)}")
         return jsonify({'message': 'Error en el servidor'}), 500
+    
+@app.route('/test-db', methods=['GET'])
+def test_db():
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(text("SELECT * FROM users LIMIT 1"))
+            rows = [dict(row) for row in result]
+            
+            if rows:
+                # Asegúrate de no incluir la contraseña en los logs
+                safe_row = {k: v for k, v in rows[0].items() if k != 'password' and k != 'password_hash'}
+                logger.info(f"Primer usuario en la base de datos: {safe_row}")
+                return jsonify({"message": "Consulta exitosa", "data": safe_row}), 200
+            else:
+                return jsonify({"message": "No se encontraron usuarios"}), 404
+    except Exception as e:
+        logger.error(f"Error al consultar la base de datos: {str(e)}")
+        return jsonify({"message": "Error al consultar la base de datos"}), 500
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -108,15 +131,17 @@ def register():
     username = data['username']
     password = data['password']
 
-    db = get_db()
+    db = next(get_db())
     try:
         # Verificar si el usuario ya existe
         if db.query(User).filter_by(username=username).first():
             return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
         # Crear nuevo usuario
+        hashed_password = generate_password_hash(password)
         new_user = User(
             username=data['username'],
+            password=hashed_password,
             full_name=data['fullName'],
             weight=float(data['weight']),
             height=float(data['height']),
@@ -126,7 +151,6 @@ def register():
             physical_activity_level=float(data['physicalActivityLevel']),
             health_conditions=data['healthConditions']
         )
-        new_user.set_password(password)
 
         db.add(new_user)
         db.commit()
@@ -140,7 +164,7 @@ def register():
 def test_connection():
     logger.info("Probando conexión a la base de datos...")
     try:
-        db = get_db()
+        db = next(get_db())
         users_count = db.query(User).count()
         logger.info(f"Conexión exitosa. Número de usuarios: {users_count}")
         return jsonify({

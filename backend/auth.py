@@ -1,3 +1,5 @@
+""" auth.py """
+
 from db import get_db_session
 from models import User
 

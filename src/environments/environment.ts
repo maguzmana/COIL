@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://database-1.cjf4a6x7rwd4.us-east-1.rds.amazonaws.com'
+  apiUrl: 'http://127.0.0.1:5000'
 };
 /*
  * For easier debugging in development mode, you can import the following file
