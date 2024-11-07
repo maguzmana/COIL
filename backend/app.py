@@ -129,25 +129,32 @@ def test_db():
 def register():
     data = request.get_json()
     
-    required_fields = ['username', 'password', 'fullName', 'weight', 'height', 'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions']
+    # Validación de campos requeridos
+    required_fields = [
+        'username', 'password', 'fullName', 'weight', 'height', 
+        'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions'
+    ]
     for field in required_fields:
-        if field not in data:
-            return jsonify({'message': f'{field} es requerido.'}), 400
+        if field not in data or not data[field]:
+            return jsonify({'message': f'{field} es requerido y no puede estar vacío'}), 400
 
     username = data['username']
     password = data['password']
 
+    # Validaciones adicionales
+    if len(password) < 8:
+        return jsonify({'message': 'La contraseña debe tener al menos 8 caracteres'}), 400
+
     db = next(get_db())
     try:
         # Verificar si el usuario ya existe
-        if db.query(User).filter_by(username=username).first():
+        existing_user = db.query(User).filter_by(username=username).first()
+        if existing_user:
             return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
         # Crear nuevo usuario
-        hashed_password = generate_password_hash(password)
         new_user = User(
-            username=data['username'],
-            password=hashed_password,
+            username=username,
             full_name=data['fullName'],
             weight=float(data['weight']),
             height=float(data['height']),
@@ -155,16 +162,49 @@ def register():
             gender=data['gender'],
             goal=data['goal'],
             physical_activity_level=float(data['physicalActivityLevel']),
-            health_conditions=data['healthConditions']
+            # Convierte la lista de condiciones de salud a una cadena separada por comas
+            health_conditions=','.join(data['healthConditions']) if data['healthConditions'] else None
         )
+        
+        # Establece la contraseña (esto generará el hash)
+        new_user.set_password(password)
 
+        # Añade y confirma el nuevo usuario
         db.add(new_user)
         db.commit()
-        return jsonify({'message': 'Usuario registrado exitosamente'}), 201
+        
+        # Genera un token JWT
+        token = jwt.encode({
+            'user_id': new_user.id,
+            'username': new_user.username,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)  # Token válido por 24 horas
+        }, JWT_SECRET_KEY, algorithm='HS256')
+
+        return jsonify({
+            'message': 'Usuario registrado exitosamente', 
+            'token': token,
+            'user': {
+                'id': new_user.id,
+                'username': new_user.username,
+                'full_name': new_user.full_name
+            }
+        }), 201
+
+    except ValueError as ve:
+        # Captura errores de conversión de tipos
+        db.rollback()
+        logger.error(f"Error de conversión de datos: {str(ve)}")
+        return jsonify({'error': 'Datos inválidos proporcionados'}), 400
+
     except Exception as e:
+        # Manejo genérico de errores
         db.rollback()
         logger.error(f"Error en registro: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Error interno del servidor'}), 500
+
+    finally:
+        # Asegura que la sesión de base de datos se cierre
+        db.close()
 
 @app.route('/test-connection', methods=['GET'])
 def test_connection():

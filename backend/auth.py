@@ -24,4 +24,13 @@ def create_user(user_data: dict):
         health_conditions=user_data['healthConditions']
     )
     user.set_password(user_data['password'])
-    return user
+    
+    try:
+        session.add(user)
+        session.commit()
+        return user
+    except Exception as e:
+        session.rollback()
+        raise e
+    finally:
+        session.close()
