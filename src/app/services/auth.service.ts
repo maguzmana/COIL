@@ -103,16 +103,35 @@ export class AuthService {
   private handleError(error: HttpErrorResponse) {
     console.error('Error completo:', error);
     
+    // Error de red o conexión
     if (error.status === 0) {
-      // Error de conexión
-      return throwError(() => new Error('No se pudo conectar con el servidor. Verifique su conexión.'));
+      return throwError(() => ({
+        error: true,
+        message: 'No se pudo conectar con el servidor. Verifique su conexión a internet.'
+      }));
     }
     
-    // Si el servidor devolvió un error
-    const errorMessage = error.error?.message || 'Error desconocido del servidor';
-    return throwError(() => ({ 
-      error: true, 
-      message: errorMessage 
+    // Errores del servidor
+    if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente
+      return throwError(() => ({
+        error: true,
+        message: error.error.message || 'Error de cliente desconocido'
+      }));
+    }
+    
+    // Error del lado del servidor
+    let errorMessage = 'Error desconocido del servidor';
+    if (error.error && error.error.message) {
+      errorMessage = error.error.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    return throwError(() => ({
+      error: true,
+      message: errorMessage,
+      status: error.status
     }));
   }
 

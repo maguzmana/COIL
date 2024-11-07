@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 // Interfaz para el formulario (con valores que pueden ser null)
 interface UserForm {
@@ -55,7 +56,8 @@ export class RegisterPage {
   constructor(
     private navCtrl: NavController,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertController: AlertController,
   ) {}
 
   async onRegister() {
@@ -76,26 +78,64 @@ export class RegisterPage {
   
         console.log('Datos que se enviarán al servidor:', userData);
   
-        const response = await this.authService.register(userData).toPromise();
-        console.log('Respuesta del servidor:', response);
+        this.authService.register(userData).subscribe({
+          next: (response) => {
+            console.log('Respuesta del servidor:', response);
   
-        if (response && response.token) {
-          this.authService.setToken(response.token);
-          alert('Registro exitoso');
-          this.navCtrl.navigateForward('/login');
-        }
-      } catch (error: any) {
-        console.error('Error completo:', error);
-        if (error.error && error.error.message) {
-          alert(`Error del servidor: ${error.error.message}`);
-        } else {
-          alert('Error en el servidor. Por favor, intenta más tarde.');
-        }
+            if (response && response.token) {
+              this.authService.setToken(response.token);
+              this.presentSuccessAlert('Registro exitoso');
+              this.navCtrl.navigateForward('/login');
+            } else {
+              this.presentErrorAlert('No se recibió un token de autenticación');
+            }
+          },
+          error: (error) => {
+            console.error('Error completo:', error);
+            this.handleRegistrationError(error);
+          }
+        });
+      } catch (error) {
+        console.error('Error inesperado:', error);
+        this.presentErrorAlert('Ocurrió un error inesperado. Intente nuevamente.');
       }
     } else {
-      alert('Por favor, completa todos los campos obligatorios.');
+      this.presentErrorAlert('Por favor, completa todos los campos obligatorios.');
     }
   }
+
+  private handleRegistrationError(error: any) {
+    let errorMessage = 'Error en el registro';
+
+    if (error.error && error.error.message) {
+      errorMessage = error.error.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+
+    this.presentErrorAlert(errorMessage);
+  }
+
+  async presentSuccessAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Registro Exitoso',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentErrorAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Error de Registro',
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
 
   validateForm(): boolean {
     return !!(

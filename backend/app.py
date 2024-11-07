@@ -22,11 +22,18 @@ load_dotenv()
 
 app = Flask(__name__)
 # Configura CORS de manera más permisiva
-CORS(app, resources={r"/*": {
-    "origins": ["*"],  # Permite todas las origins
-    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    "allow_headers": ["Content-Type", "Authorization"]
-}})
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "http://localhost:8100",  # Ionic dev server
+            "http://localhost:4200",  # Angular dev server
+            "http://44.203.176.142:8100",  # Producción Ionic
+            "http://44.203.176.142"  # Producción web
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # Funciones de CORS
 def add_cors_headers(response):
