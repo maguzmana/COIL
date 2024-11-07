@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://localhost:8100"]}})
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://localhost:8100", "http://35.174.155.239:8100", "http://35.174.155.239"]}})
 
 # Configuración de la base de datos
 DB_USER = os.getenv('DB_USER')
