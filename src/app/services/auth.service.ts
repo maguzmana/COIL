@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { 
   HttpClient, 
   HttpHeaders, 
-  HttpErrorResponse 
+  HttpErrorResponse,
+  HttpResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 // Interfaces para tipar los datos
@@ -31,6 +32,11 @@ export interface AuthResponse {
   token?: string;
   message?: string;
   error?: string;
+  user?: {
+    id: number;
+    username: string;
+    full_name: string;
+  };
 }
 
 @Injectable({
@@ -46,17 +52,29 @@ export class AuthService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData, { headers })
-      .pipe(
-        tap(response => {
-          console.log('Respuesta del servidor:', response);
-          if (response.token) {
-            this.setToken(response.token);
-          }
-        }),
-        catchError(this.handleError)
-      );
+  
+    console.log('Enviando datos de registro:', userData);
+    console.log('URL de registro:', `${this.apiUrl}/register`);
+  
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData, { 
+      headers,
+      observe: 'response'
+    }).pipe(
+      map((response: HttpResponse<AuthResponse>) => {
+        // Extraer el cuerpo de la respuesta
+        const body = response.body;
+        
+        if (body && body.token) {
+          this.setToken(body.token);
+        }
+        
+        return body as AuthResponse;
+      }),
+      tap(response => {
+        console.log('Respuesta del servidor:', response);
+      }),
+      catchError(this.handleError)
+    );
   }
 
   login(loginData: LoginUser): Observable<AuthResponse> {
@@ -64,15 +82,21 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData, { headers })
-      .pipe(
-        tap(response => {
-          if (response.token) {
-            this.setToken(response.token);
-          }
-        }),
-        catchError(this.handleError)
-      );
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData, { 
+      headers,
+      observe: 'response'
+    }).pipe(
+      map((response: HttpResponse<AuthResponse>) => {
+        const body = response.body;
+        
+        if (body && body.token) {
+          this.setToken(body.token);
+        }
+        
+        return body as AuthResponse;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   // Método para manejar errores de HTTP
@@ -109,10 +133,17 @@ export class AuthService {
   verifyToken(): Observable<AuthResponse> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<AuthResponse>(`${this.apiUrl}/verify-token`, { headers })
-      .pipe(
-        catchError(this.handleError)
-      );
+    
+    return this.http.get<AuthResponse>(`${this.apiUrl}/verify-token`, { 
+      headers,
+      observe: 'response'
+    }).pipe(
+      map((response: HttpResponse<AuthResponse>) => {
+        const body = response.body;
+        return body as AuthResponse;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   isAuthenticated(): boolean {

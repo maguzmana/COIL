@@ -164,7 +164,8 @@ def login():
 @app.route('/register', methods=['POST'])
 def register():
     if request.method == 'OPTIONS':
-        response = jsonify({'message': 'Preflight successful'})
+        # Manejo de preflight
+        response = make_response()
         response.headers.add('Access-Control-Allow-Origin', '*')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
         response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
