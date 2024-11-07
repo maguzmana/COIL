@@ -66,7 +66,7 @@ def login():
         return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
 
     # Comentar o eliminar la verificación de credenciales
-    """
+    
     db = next(get_db())
     try:
         user = db.query(User).filter_by(username=username).first()
@@ -89,23 +89,7 @@ def login():
     except Exception as e:
         logger.error(f"Error en login: {str(e)}")
         return jsonify({'message': 'Error en el servidor'}), 500
-    """
-
-    # Aceptar cualquier credencial
-    logger.info("Modo de desarrollo: Aceptando cualquier credencial")
-    token = jwt.encode({
-        'user_id': 1,  # ID de usuario ficticio
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-    }, JWT_SECRET_KEY, algorithm='HS256')
-
-    return jsonify({
-        'token': token,
-        'user': {
-            'id': 1,
-            'username': username,
-            'full_name': 'Usuario de Desarrollo'
-        }
-    }), 200
+   
     
 @app.route('/test-db', methods=['GET'])
 def test_db():
