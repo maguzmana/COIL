@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import openai
 from sqlalchemy import create_engine
@@ -21,7 +21,32 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "http://localhost:8100", "http://35.174.155.239:8100", "http://35.174.155.239"]}})
+# Configura CORS de manera más permisiva
+CORS(app, resources={r"/*": {
+    "origins": ["*"],  # Permite todas las origins
+    "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "allow_headers": ["Content-Type", "Authorization"]
+}})
+
+# Funciones de CORS
+def add_cors_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+    return response
+
+@app.after_request
+def after_request(response):
+    return add_cors_headers(response)
+
+# Manejador de preflight para todas las rutas
+@app.route('/options', methods=['OPTIONS'])
+def handle_options():
+    response = make_response()
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+    return response
 
 # Configuración de la base de datos
 DB_USER = os.getenv('DB_USER')
@@ -138,6 +163,13 @@ def login():
 
 @app.route('/register', methods=['POST'])
 def register():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'Preflight successful'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+        return response
+    
     data = request.get_json()
     
     # Validación de campos requeridos

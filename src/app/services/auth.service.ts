@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment'; // Asegúrate de que la ruta sea correcta
+import { 
+  HttpClient, 
+  HttpHeaders, 
+  HttpErrorResponse 
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 // Interfaces para tipar los datos
 export interface RegisterUser {
@@ -50,7 +54,8 @@ export class AuthService {
           if (response.token) {
             this.setToken(response.token);
           }
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -65,8 +70,26 @@ export class AuthService {
           if (response.token) {
             this.setToken(response.token);
           }
-        })
+        }),
+        catchError(this.handleError)
       );
+  }
+
+  // Método para manejar errores de HTTP
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error completo:', error);
+    
+    if (error.status === 0) {
+      // Error de conexión
+      return throwError(() => new Error('No se pudo conectar con el servidor. Verifique su conexión.'));
+    }
+    
+    // Si el servidor devolvió un error
+    const errorMessage = error.error?.message || 'Error desconocido del servidor';
+    return throwError(() => ({ 
+      error: true, 
+      message: errorMessage 
+    }));
   }
 
   getToken(): string | null {
@@ -86,7 +109,10 @@ export class AuthService {
   verifyToken(): Observable<AuthResponse> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<AuthResponse>(`${this.apiUrl}/verify-token`, { headers });
+    return this.http.get<AuthResponse>(`${this.apiUrl}/verify-token`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   isAuthenticated(): boolean {
