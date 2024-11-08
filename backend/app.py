@@ -1,3 +1,4 @@
+""" app.py """
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import openai
@@ -12,6 +13,7 @@ from dotenv import load_dotenv
 import logging
 from functools import wraps
 import bcrypt
+import logging
 
 # Configurar logging
 logging.basicConfig(level=logging.DEBUG)
@@ -179,6 +181,7 @@ def register():
         return response
     
     data = request.get_json()
+    logging.debug(f'Datos recibidos en /register: {data}')
     
     # Validación de campos requeridos
     required_fields = [
@@ -187,6 +190,7 @@ def register():
     ]
     for field in required_fields:
         if field not in data or not data[field]:
+            logging.error(f'Campo faltante o vacío: {field}')
             return jsonify({'message': f'{field} es requerido y no puede estar vacío'}), 400
 
     username = data['username']

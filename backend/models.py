@@ -4,7 +4,17 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from db import Base
 import bcrypt
+from sqlalchemy import Enum
 
+class GoalEnum(Enum):
+    lose_weight = 'Lose Weight'
+    gain_muscle = 'Gain Muscle'
+    health_maintenance = 'Health Maintenance'
+
+class HealthConditionEnum(Enum):
+    diabetes = 'Diabetes'
+    hypertension = 'Hypertension'
+    kidney_disease = 'Kidney Disease'
 
 #Modelo user
 class User(Base):
@@ -14,7 +24,6 @@ class User(Base):
     full_name = Column(String(100), nullable=False)
     username = Column(String(50), unique=True, nullable=False)
     
-    # Asegúrate de que estas líneas estén presentes
     password = Column(String(128), nullable=False)
     password_hash = Column(String(255), nullable=False)  
     
@@ -22,9 +31,9 @@ class User(Base):
     height = Column(Float, nullable=False)
     age = Column(Integer, nullable=False)
     gender = Column(String(10), nullable=False)
-    goal = Column(String(50), nullable=False)
-    physical_activity_level = Column(Float, nullable=False)  # Cambiado de Integer a Float
-    health_conditions = Column(Text, nullable=True)
+    goal = Column(Enum(GoalEnum), nullable=False)  # Usando Enum para goal
+    physical_activity_level = Column(Enum(GoalEnum), nullable=False)  # Usando Enum para activity level
+    health_conditions = Column(Enum(HealthConditionEnum), nullable=True)  # Usando Enum para health conditions
 
     def set_password(self, password):
         password_bytes = password.encode('utf-8')

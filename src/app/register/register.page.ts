@@ -1,10 +1,10 @@
-/* register.page.ts */
-
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // Interfaz para el formulario (con valores que pueden ser null)
 interface UserForm {
@@ -31,7 +31,7 @@ interface RegisterUser {
   gender: string;
   goal: string;
   physicalActivityLevel: number;
-  healthConditions: string[]; // Cambiado a string[]
+  healthConditions: string[];
 }
 
 @Component({
@@ -40,16 +40,16 @@ interface RegisterUser {
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage {
-  user: UserForm = {
+  user: RegisterUser = {
     fullName: '',
     username: '',
     password: '',
-    weight: null,
-    height: null,
-    age: null,
+    weight: 0,
+    height: 0,
+    age: 0,
     gender: '',
     goal: '',
-    physicalActivityLevel: null,
+    physicalActivityLevel: 1.2,
     healthConditions: []
   };
 
@@ -73,15 +73,15 @@ export class RegisterPage {
           gender: this.user.gender,
           goal: this.user.goal,
           physicalActivityLevel: this.user.physicalActivityLevel!,
-          healthConditions: this.user.healthConditions
+          healthConditions: this.user.healthConditions || []
         };
-  
+
         console.log('Datos que se enviarán al servidor:', userData);
-  
+
         this.authService.register(userData).subscribe({
           next: (response) => {
             console.log('Respuesta del servidor:', response);
-  
+
             if (response && response.token) {
               this.authService.setToken(response.token);
               this.presentSuccessAlert('Registro exitoso');
@@ -90,7 +90,7 @@ export class RegisterPage {
               this.presentErrorAlert('No se recibió un token de autenticación');
             }
           },
-          error: (error) => {
+          error: (error: HttpErrorResponse) => {
             console.error('Error completo:', error);
             this.handleRegistrationError(error);
           }
@@ -104,12 +104,17 @@ export class RegisterPage {
     }
   }
 
-  private handleRegistrationError(error: any) {
+  private handleRegistrationError(error: HttpErrorResponse) {
     let errorMessage = 'Error en el registro';
 
-    if (error.error && error.error.message) {
+    if (error.status === 0) {
+      // Error de red o conexión
+      errorMessage = 'No se pudo conectar con el servidor. Verifique su conexión a internet.';
+    } else if (error.error && error.error.message) {
+      // Error del lado del servidor
       errorMessage = error.error.message;
     } else if (error.message) {
+      // Error del lado del cliente
       errorMessage = error.message;
     }
 
@@ -136,7 +141,6 @@ export class RegisterPage {
     await alert.present();
   }
 
-
   validateForm(): boolean {
     return !!(
       this.user.fullName &&
@@ -159,49 +163,5 @@ export class RegisterPage {
 
   goToLogin() {
     this.navCtrl.navigateForward('/login');
-  }
-
-  isFieldValid(field: keyof UserForm): boolean {
-    if (field === 'weight' || field === 'height' || field === 'age' || field === 'physicalActivityLevel') {
-      return this.user[field] !== null && this.user[field]! > 0;
-    }
-    if (typeof this.user[field] === 'string') {
-      return (this.user[field] as string).trim().length > 0;
-    }
-    return !!this.user[field];
-  }
-
-  onNumberInput(event: any, field: 'weight' | 'height' | 'age' | 'physicalActivityLevel') {
-    const value = event.target.value;
-    if (value === '' || value === null) {
-      this.user[field] = null;
-    } else {
-      const numValue = parseFloat(value);
-      this.user[field] = numValue > 0 ? numValue : null;
-    }
-  }
-
-  onHealthConditionChange(condition: string) {
-    const index = this.user.healthConditions.indexOf(condition);
-    if (index === -1) {
-      this.user.healthConditions.push(condition);
-    } else {
-      this.user.healthConditions.splice(index, 1);
-    }
-  }
-
-  resetForm() {
-    this.user = {
-      fullName: '',
-      username: '',
-      password: '',
-      weight: null,
-      height: null,
-      age: null,
-      gender: '',
-      goal: '',
-      physicalActivityLevel: null,
-      healthConditions: []
-    };
   }
 }

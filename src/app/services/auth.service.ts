@@ -9,6 +9,8 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
+
+
 // Interfaces para tipar los datos
 export interface RegisterUser {
   fullName: string;
@@ -45,6 +47,7 @@ export interface AuthResponse {
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private token: string | null = null;
+  private baseUrl = 'http://ec2-18-233-9-32.compute-1.amazonaws.com:5000';
 
   constructor(private http: HttpClient) {}
 
@@ -55,25 +58,25 @@ export class AuthService {
   
     console.log('Enviando datos de registro:', userData);
     console.log('URL de registro:', `${this.apiUrl}/register`);
-  
+
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userData, { 
       headers,
       observe: 'response'
     }).pipe(
       map((response: HttpResponse<AuthResponse>) => {
-        // Extraer el cuerpo de la respuesta
         const body = response.body;
-        
         if (body && body.token) {
           this.setToken(body.token);
         }
-        
         return body as AuthResponse;
       }),
       tap(response => {
         console.log('Respuesta del servidor:', response);
       }),
-      catchError(this.handleError)
+      catchError((error) => {
+        console.error('Error durante el registro:', error);
+        return throwError(() => new Error('Error en el proceso de registro.'));
+      })
     );
   }
 
@@ -139,9 +142,9 @@ export class AuthService {
     return this.token || localStorage.getItem('token');
   }
 
-  setToken(token: string): void {
+  public setToken(token: string): void {
     this.token = token;
-    localStorage.setItem('token', token);
+    localStorage.setItem('authToken', token);
   }
 
   logout(): void {
