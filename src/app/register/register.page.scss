@@ -71,11 +71,26 @@ ion-content {
 
 
 ion-item {
-    width: 100%; /* Cada ion-item ocupa todo el ancho */
-    margin-bottom: 15px; /* Espacio entre los elementos */
-}
-
-
+    --background: transparent; /* Fondo transparente para evitar el bloque negro */
+    --inner-padding: 0px; /* Opcional: ajusta el padding interno */
+    --border-color: transparent; /* Elimina bordes oscuros si los hay */
+    width: 100%; /* Asegura que cada item ocupe todo el ancho */
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Asegura que los labels estén arriba de los inputs */
+    align-items: flex-start; /* Alinea horizontalmente al inicio (izquierda) */
+    text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+  }
+  
+  ion-label {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    color: #ffffff; /* Mantiene el texto del label en blanco */
+    font-size: 14px; /* Ajusta el tamaño del texto según tu preferencia */
+    font-weight: bold; /* Hace que el texto resalte */
+    margin-bottom: 5px; /* Añade espacio entre el label y el input */
+    text-align: left; /* Asegura la alineación izquierda */
+  }
+  
 
 .input-container[_ngcontent-ng-c648470614] {
     background: #ffffff; /* Fondo blanco para el campo de entrada */

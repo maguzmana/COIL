@@ -4,6 +4,14 @@ ion-content.custom-content {
   --ion-background-color: #080d4f;
 }
 
+.gradient-text {
+  background: linear-gradient(to right, #00bfff, #690f99); 
+  background-clip: text; 
+  color: transparent; 
+  font-weight: bold; 
+  font-size: 25px; 
+}
+
 .custom-content {
   background-color: #080d4f !important; /* Fuerza el color de fondo */
   height: 100%; /* Asegúrate de que ocupe toda la altura */
@@ -15,6 +23,50 @@ ion-content.custom-content {
   align-items: center;
   justify-content: center;
 }
+
+.ion-margin{
+  margin-top: 10px;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 15px;
+  --highlight-color-focused: var(--ion-color-primary);
+  display: block; /* Cambia el ion-item a block para que las etiquetas queden arriba */
+}
+
+ion-label {
+  font-size: 14px; /* Ajusta el tamaño de las etiquetas */
+  color: white; /* Color blanco para el texto */
+  margin-bottom: 5px; /* Separación entre la etiqueta y el input */
+  display: block; /* Posiciona el label encima del input */
+}
+
+ion-input {
+  font-size: 14px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  height: 40px;
+  background-color: white; /* Fondo blanco del input */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  color: black; /* Texto negro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  width: 100%; /* Asegura que el input ocupe todo el espacio disponible */
+}
+
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 
 ion-card {
   width: 100%;
@@ -42,31 +94,32 @@ ion-card-subtitle {
 }
 
 ion-item {
+  
   --padding-start: 0;
   --inner-padding-end: 0;
   margin-bottom: 15px;
 }
 
 
-/* Centrado del contenedor del botón */
-.button-container {
-  display: flex;
-  justify-content: center; /* Centra el botón horizontalmente */
-  width: 100%; /* Abarca el ancho del contenedor */
-}
-
-ion-button[type="submit"] {
-  
-  margin-top: 20px; /* Espacio superior para separación */
-  width: 80%; /* Ajusta el ancho del botón */
-  max-width: 300px; /* Ancho máximo para el botón */
+.login-button {
+  margin-top: 34px;
+  width: 80%;
+  max-width: 300px;
   --background: rgba(255, 255, 255, 0.1);
-  --border-radius: 20px; /* Bordes redondeados */
+  --border-radius: 20px;
   color: white;
   font-weight: bold;
-
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
   text-transform: none;
+  margin-bottom: 22px;
 }
+
+
+.link-register{
+  color: white;
+  font-weight: bold;
+}
+
 
 ion-checkbox {
   --background: #3a3a3a; /* Fondo del checkbox */

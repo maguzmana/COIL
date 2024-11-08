@@ -1,42 +1,55 @@
-
-
 <ion-content class="custom-content">
   <div class="login-container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Bienvenido a FitFocus</ion-card-title>
+        <ion-card-title class="gradient-text">Bienvenido a FitFocus</ion-card-title>
         <ion-card-subtitle>Inicia sesión para continuar</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
         <form (ngSubmit)="onLogin()">
           <ion-item>
-            <ion-label position="floating">Usuario</ion-label>
+            <ion-label position="stacked">Usuario</ion-label>
             <ion-input type="text" [(ngModel)]="credentials.username" name="username" required></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">Contraseña</ion-label>
+            <ion-label position="stacked">Contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="credentials.password" name="password" required></ion-input>
           </ion-item>
 
-           <!-- Checkbox para "Guardar contraseña" -->
-           <ion-item lines="none">
+          <!-- Checkbox para "Guardar contraseña" -->
+          <ion-item lines="none">
             <ion-checkbox slot="start" color="primary"></ion-checkbox>
             <ion-label>Guardar contraseña</ion-label>
           </ion-item>
 
           <div class="button-container">
-            <ion-button expand="block" type="submit" class="ion-margin-top">
+            <ion-button expand="block" type="submit" class="login-button">
               Iniciar Sesión
+            </ion-button>            
+          </div>
+        </form>
+
+        <!-- Opciones de inicio de sesión con redes sociales -->
+        <div class="social-login-container ion-text-center">
+          <ion-text class="ion-margin">o inicia con:</ion-text>
+          <div class="social-buttons">
+            <ion-button fill="clear" >
+              <ion-icon name="logo-google" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" >
+              <ion-icon name="logo-facebook" slot="icon-only"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" >
+              <ion-icon name="finger-print" slot="icon-only"></ion-icon>
             </ion-button>
           </div>
-          
-        </form>
+        </div>
 
         <div class="ion-text-center ion-margin-top">
           <ion-text>¿No tienes una cuenta?</ion-text>
-          <ion-button fill="clear" (click)="goToRegister()">
+          <ion-button class="link-register" fill="clear" (click)="goToRegister()">
             Regístrate aquí
           </ion-button>
         </div>
