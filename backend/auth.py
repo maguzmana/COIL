@@ -3,12 +3,12 @@
 from db import get_db_session
 from models import User
 
-def authenticate_user(username: str, password: str):
+"""def authenticate_user(username: str, password: str):
     session = get_db_session()
     user = session.query(User).filter(User.username == username).first()
     if not user or not user.check_password(password):
         return None
-    return user
+    return user"""
 
 def create_user(user_data: dict):
     session = get_db_session()

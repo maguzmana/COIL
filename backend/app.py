@@ -1,3 +1,4 @@
+""" app.py """
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import openai
@@ -85,89 +86,11 @@ def get_db():
     finally:
         db.close()
 
-# Decorador de autenticación
-"""def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        
-        # Verificar si el token está en los headers
-        if 'Authorization' in request.headers:
-            token = request.headers['Authorization'].split(" ")[1]
-        
-        if not token:
-            return jsonify({'message': 'Token de autenticación no proporcionado'}), 401
-        
-        db = next(get_db())
-        try:
-            # Decodificar el token
-            data = jwt.decode(token, JWT_SECRET_KEY, algorithms=['HS256'])
-            current_user = db.query(User).filter_by(id=data['user_id']).first()
-            
-            if not current_user:
-                return jsonify({'message': 'Usuario no encontrado'}), 401
-        
-        except jwt.ExpiredSignatureError:
-            return jsonify({'message': 'Token expirado'}), 401
-        except jwt.InvalidTokenError:
-            return jsonify({'message': 'Token inválido'}), 401
-        except Exception as e:
-            logger.error(f"Error en verificación de token: {str(e)}")
-            return jsonify({'message': 'Error interno del servidor'}), 500
-        finally:
-            db.close()
-        
-        # Pasar el usuario actual a la función
-        return f(current_user, *args, **kwargs)
-    
-    return decorated"""
-
 # Rutas de autenticación y registro
-"""@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
-
-    logger.info(f"Intento de login para usuario: {username}")
-
-    if not username or not password:
-        return jsonify({'message': 'Usuario y contraseña son requeridos'}), 400
-
-    db = next(get_db())
-    try:
-        user = db.query(User).filter_by(username=username).first()
-        
-        if not user:
-            logger.warning(f"Usuario no encontrado: {username}")
-            return jsonify({'message': 'Credenciales inválidas'}), 401
-
-        # Verificar contraseña usando bcrypt
-        if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
-
-            token = jwt.encode({
-                'user_id': user.id,
-                'username': user.username,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
-            }, JWT_SECRET_KEY, algorithm='HS256')
-
-            return jsonify({
-                'token': token,
-                'user': {
-                    'id': user.id,
-                    'username': user.username,
-                    'full_name': user.full_name
-                }
-            }), 200
-        else:
-            logger.warning("Contraseña incorrecta")
-            return jsonify({'message': 'Credenciales inválidas'}), 401
-
-    except Exception as e:
-        logger.error(f"Error en login: {str(e)}")
-        return jsonify({'message': 'Error en el servidor'}), 500
-    finally:
-        db.close()"""
+    # Se ha comentado la lógica de inicio de sesión
+    pass
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -197,7 +120,7 @@ def register():
 
     # Validaciones adicionales
     if len(password) < 8:
-        return jsonify({'message': 'La contraseña debe tener al menos 8 caracteres'}), 400
+        return jsonify({' message': 'La contraseña debe tener al menos 8 caracteres'}), 400
 
     db = next(get_db())
     try:
@@ -228,16 +151,8 @@ def register():
         db.add(new_user)
         db.commit()
         
-        # Genera un token JWT
-        token = jwt.encode({
-            'user_id': new_user.id,
-            'username': new_user.username,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)  # Token válido por 24 horas
-        }, JWT_SECRET_KEY, algorithm='HS256')
-
         return jsonify({
             'message': 'Usuario registrado exitosamente', 
-            'token': token,
             'user': {
                 'id': new_user.id,
                 'username': new_user.username,
