@@ -60,6 +60,11 @@ export class RegisterPage {
     private alertController: AlertController,
   ) {}
 
+  onNumberInput(event: any, field: string) {
+    // Aquí puedes agregar lógica para manejar los cambios en los campos
+    // 'weight', 'height' o 'age' según el campo que esté cambiando
+    console.log(`Campo: ${field}, Nuevo valor: ${event.detail.value}`);}
+
   async onRegister() {
     if (this.validateForm()) {
       try {
