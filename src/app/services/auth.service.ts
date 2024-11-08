@@ -49,7 +49,7 @@ export interface AuthResponse {
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private token: string | null = null;
-  private baseUrl = 'http://ec2-35-174-114-42.compute-1.amazonaws.com:5000';
+  private baseUrl = 'http://52.44.167.31:5000';
 
   constructor(private http: HttpClient) {}
 
