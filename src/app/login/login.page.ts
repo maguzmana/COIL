@@ -1,3 +1,5 @@
+/* login.page.ts */
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
@@ -22,39 +24,16 @@ export class LoginPage {
   ) {}
 
   async onLogin() {
-    if (!this.credentials.username || !this.credentials.password) {
-      await this.showAlert('Error', 'Por favor, completa todos los campos.');
-      return;
-    }
-
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
       spinner: 'crescent'
     });
     await loading.present();
 
-    try {
-      this.authService.login(this.credentials).subscribe(
-        (response: any) => {
-          loading.dismiss();
-          if (response.token) {
-            this.authService.setToken(response.token);
-            this.router.navigate(['/tabs/tab2']);
-          } else {
-            this.showAlert('Error', 'Respuesta inválida del servidor');
-          }
-        },
-        async (error) => {
-          loading.dismiss();
-          console.error('Error al iniciar sesión:', error);
-          await this.showAlert('Error', 'Usuario o contraseña incorrectos');
-        }
-      );
-    } catch (error) {
-      loading.dismiss();
-      console.error('Error al iniciar sesión:', error);
-      await this.showAlert('Error', 'Ocurrió un error al intentar iniciar sesión');
-    }
+    // Aquí se asume que el login siempre es exitoso
+    this.authService.setToken('fake-token'); // Establece un token ficticio
+    loading.dismiss();
+    this.router.navigate(['/tabs/tab2']);
   }
 
   async showAlert(header: string, message: string) {
