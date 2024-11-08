@@ -1,4 +1,3 @@
-""" app.py """
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import openai
@@ -89,8 +88,25 @@ def get_db():
 # Rutas de autenticación y registro
 @app.route('/login', methods=['POST'])
 def login():
-    # Se ha comentado la lógica de inicio de sesión
-    pass
+    if request.method == 'OPTIONS':
+        # Manejo de preflight
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'POST,OPTIONS')
+        return response
+
+    data = request.get_json()
+    logging.debug(f'Datos recibidos en /login: {data}')
+
+    # No se realiza verificación de credenciales
+    return jsonify({
+        'message': 'Inicio de sesión exitoso',
+        'user': {
+            'username': data.get('username', 'usuario_desconocido'),
+            'full_name': data.get('fullName', 'Nombre Desconocido')
+        }
+    }), 200
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -108,7 +124,7 @@ def register():
     # Validación de campos requeridos
     required_fields = [
         'username', 'password', 'fullName', 'weight', 'height', 
-        'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions'
+        'age', ' gender', 'goal', 'physicalActivityLevel', 'healthConditions'
     ]
     for field in required_fields:
         if field not in data or not data[field]:
@@ -120,7 +136,7 @@ def register():
 
     # Validaciones adicionales
     if len(password) < 8:
-        return jsonify({' message': 'La contraseña debe tener al menos 8 caracteres'}), 400
+        return jsonify({'message': 'La contraseña debe tener al menos 8 caracteres'}), 400
 
     db = next(get_db())
     try:
