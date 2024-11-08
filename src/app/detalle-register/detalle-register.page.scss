@@ -1,0 +1,35 @@
+.custom-content {
+    --ion-background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .custom-item {
+    margin-bottom: 15px;
+  }
+  
+  .centered-select-container {
+    text-align: left;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .register-button {
+    --background: #6c63ff;
+    --border-radius: 20px;
+    color: white;
+    font-weight: bold;
+  }
+  
