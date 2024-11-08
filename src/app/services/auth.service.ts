@@ -82,11 +82,12 @@ export class AuthService {
     );
   }
 
-  login(loginData: LoginUser): Observable<AuthResponse> {
+  login(loginData: LoginUser ): Observable<AuthResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
+    // Puedes comentar o eliminar la lógica que maneja el token
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, loginData, { 
       headers,
       observe: 'response'
@@ -94,15 +95,16 @@ export class AuthService {
       map((response: HttpResponse<AuthResponse>) => {
         const body = response.body;
         
-        if (body && body.token) {
-          this.setToken(body.token);
-        }
+        // Comentado para no guardar el token
+        // if (body && body.token) {
+        //     this.setToken(body.token);
+        // }
         
         return body as AuthResponse;
       }),
       catchError(this.handleError)
     );
-  }
+}
 
   // Método para manejar errores de HTTP
   private handleError(error: HttpErrorResponse) {
@@ -154,7 +156,7 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  verifyToken(): Observable<AuthResponse> {
+  /* verifyToken(): Observable<AuthResponse> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
@@ -172,5 +174,6 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return this.getToken() !== null;
-  }
-}
+  } */
+} 
+
