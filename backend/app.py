@@ -1,4 +1,3 @@
-""" app.py """
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import openai
@@ -13,7 +12,6 @@ from dotenv import load_dotenv
 import logging
 from functools import wraps
 import bcrypt
-import logging
 
 # Configurar logging
 logging.basicConfig(level=logging.DEBUG)
@@ -29,8 +27,8 @@ CORS(app, resources={
         "origins": [
             "http://localhost:8100",  # Ionic dev server
             "http://localhost:4200",  # Angular dev server
-            "http://44.203.176.142:8100",  # Producción Ionic
-            "http://44.203.176.142"  # Producción web
+            "http://35.174.114.42:8100",  # Producción Ionic
+            "http://35.174.114.42"  # Producción web
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"]
@@ -146,6 +144,7 @@ def login():
 
         # Verificar contraseña usando bcrypt
         if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
+
             token = jwt.encode({
                 'user_id': user.id,
                 'username': user.username,
@@ -266,48 +265,14 @@ def register():
 def test_db():
     try:
         with engine.connect() as connection:
-            result = connection.execute(text("SELECT * FROM users LIMIT 1"))
-            rows = [dict(row) for row in result]
-            
-            if rows:
-                # Asegúrate de no incluir la contraseña en los logs
-                safe_row = {k: v for k, v in rows[0].items() if k != 'password' and k != 'password_hash'}
-                logger.info(f"Primer usuario en la base de datos: {safe_row}")
-                return jsonify({"message": "Consulta exitosa", "data": safe_row}), 200
-            else:
-                return jsonify({"message": "No se encontraron usuarios"}), 404
+            result = connection.execute(text("SELECT * FROM users LIMIT 1;"))
+            user = result.fetchone()
+            if user:
+                return jsonify({"message": "Conexión exitosa a la base de datos", "user": user}), 200
+            return jsonify({"message": "Conexión exitosa, pero no se encontró ningún usuario"}), 200
     except Exception as e:
-        logger.error(f"Error al consultar la base de datos: {str(e)}")
-        return jsonify({"message": "Error al consultar la base de datos"}), 500
-
-@app.route('/test-connection', methods=['GET'])
-def test_connection():
-    logger.info("Probando conexión a la base de datos...")
-    try:
-        db = next(get_db())
-        users_count = db.query(User).count()
-        logger.info(f"Conexión exitosa. Número de usuarios: {users_count}")
-        return jsonify({
-            'status': 'success',
-            'message': 'Conexión exitosa',
-            'users_count': users_count
-        }), 200
-    except Exception as e:
-        logger.error(f"Error en la conexión: {str(e)}")
-        return jsonify({
-            'status': 'error',
-            'message': f'Error de conexión: {str(e)}'
-        }), 500
-
-# Ejemplo de ruta protegida
-@app.route('/perfil', methods=['GET'])
-@token_required
-def obtener_perfil(current_user):
-    return jsonify({
-        'id': current_user.id,
-        'username': current_user.username,
-        'full_name': current_user.full_name
-    }), 200
+        logger.error(f"Error de conexión con la base de datos: {str(e)}")
+        return jsonify({"message": "Error al conectar con la base de datos"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True)
