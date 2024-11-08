@@ -27,8 +27,8 @@ CORS(app, resources={
         "origins": [
             "http://localhost:8100",  # Ionic dev server
             "http://localhost:4200",  # Angular dev server
-            "http://35.174.114.42:8100",  # Producción Ionic
-            "http://35.174.114.42"  # Producción web
+            "http://52.44.167.31:8100",  # Producción Ionic
+            "http://52.44.167.31"  # Producción web
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"]
@@ -86,7 +86,7 @@ def get_db():
         db.close()
 
 # Decorador de autenticación
-def token_required(f):
+"""def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
@@ -120,10 +120,10 @@ def token_required(f):
         # Pasar el usuario actual a la función
         return f(current_user, *args, **kwargs)
     
-    return decorated
+    return decorated"""
 
 # Rutas de autenticación y registro
-@app.route('/login', methods=['POST'])
+"""@app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     username = data.get('username')
@@ -167,7 +167,7 @@ def login():
         logger.error(f"Error en login: {str(e)}")
         return jsonify({'message': 'Error en el servidor'}), 500
     finally:
-        db.close()
+        db.close()"""
 
 @app.route('/register', methods=['POST'])
 def register():
