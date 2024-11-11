@@ -135,11 +135,13 @@ ion-footer {
 
 
 ion-fab-button {
+  --background:#ac6fb8; /* Cambia este valor al color que desees */
+  --color: #ffffff; /* Color del ícono dentro del botón */
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
   margin-right: 20px;
 
   &:hover {
-    --background: var(--ion-color-primary-shade);
+    --background: #c29af9;/* Color al pasar el cursor */
   }
 }
