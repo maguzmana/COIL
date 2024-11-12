@@ -24,7 +24,10 @@ export class InicioPage implements OnInit {
   ];
 
   constructor() { }
-  ngOnInit() {
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
+  //ngOnInit() {
+  //}
 
 }
