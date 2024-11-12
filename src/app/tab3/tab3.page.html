@@ -24,28 +24,28 @@
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-label position="block">Nombre completo</ion-label>
       <ion-input formControlName="fullName" type="text"></ion-input>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-icon slot="start" name="fitness-outline"></ion-icon>
-      <ion-label position="floating">Peso (kg)</ion-label>
+      <ion-label position="block">Peso (kg)</ion-label>
       <ion-input formControlName="weight" type="number"></ion-input>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
       <ion-icon slot="start" name="ruler-outline"></ion-icon>
-      <ion-label position="floating">Altura (cm)</ion-label>
+      <ion-label position="block">Altura (cm)</ion-label>
       <ion-input formControlName="height" type="number"></ion-input>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+    </ion-item> 
 
     <ion-item>
       <ion-icon slot="start" name="calendar-outline"></ion-icon>
-      <ion-label position="floating">Edad</ion-label>
+      <ion-label position="block">Edad</ion-label>
       <ion-input formControlName="age" type="number"></ion-input>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
