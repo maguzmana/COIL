@@ -13,21 +13,32 @@ ion-thumbnail {
   }
   
   ion-list-header {
-    background: var(--ion-color-light);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    background: transparent;
+    padding-top: 2px;
+    padding-bottom: 16px;
   }
   
   ion-list-header h1 {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--ion-color-primary);
+    color: white;
   }
   
   ion-item {
-    --padding-start: 0;
-    --inner-padding-end: 0;
+    background-color: white !important; /* Asegura que el fondo blanco se aplique */
+    margin-bottom: 10px !important; /* Espaciado entre los ítems */
+    border-radius: 10px !important; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Sombra sutil */
   }
+
+  ion-item-sliding ion-item {
+    background-color: white !important;
+    margin-bottom: 10px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  
   
   ion-card {
     margin: 20px;

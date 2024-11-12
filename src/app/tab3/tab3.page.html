@@ -1,69 +1,106 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Perfil de Usuario
-    </ion-title>
+    <ion-title>Perfil de usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content class="perfil-content">
+  <div class="perfil-container">
+    <ion-avatar>
+      <img src="assets/images/usuario.jpg" />
+    </ion-avatar>
+    <div class="user-info">
+      <h3>Juan Carlos</h3>
+      <p>Edad: 28 <ion-icon name="male-outline"></ion-icon></p>
+      <p>86 Kg | 1.96 CM</p>
+    </div>
+  </div>
+
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-item>
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
       <ion-label position="floating">Nombre completo</ion-label>
       <ion-input formControlName="fullName" type="text"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="fitness-outline"></ion-icon>
       <ion-label position="floating">Peso (kg)</ion-label>
       <ion-input formControlName="weight" type="number"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="ruler-outline"></ion-icon>
       <ion-label position="floating">Altura (cm)</ion-label>
       <ion-input formControlName="height" type="number"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
       <ion-label position="floating">Edad</ion-label>
       <ion-input formControlName="age" type="number"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="body-outline"></ion-icon>
       <ion-label>Género</ion-label>
       <ion-select formControlName="gender">
         <ion-select-option value="male">Masculino</ion-select-option>
         <ion-select-option value="female">Femenino</ion-select-option>
         <ion-select-option value="other">Otro</ion-select-option>
       </ion-select>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="pulse-outline"></ion-icon>
       <ion-label position="floating">Objetivo</ion-label>
       <ion-input formControlName="goal" type="text"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="walk-outline"></ion-icon>
       <ion-label position="floating">Nivel de actividad física</ion-label>
       <ion-input formControlName="physicalActivityLevel" type="number"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="medkit-outline"></ion-icon>
       <ion-label position="floating">Condiciones de salud</ion-label>
       <ion-input formControlName="healthConditions" type="text"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="key-outline"></ion-icon>
       <ion-label position="floating">Nueva contraseña</ion-label>
       <ion-input formControlName="password" type="password"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
     <ion-item>
+      <ion-icon slot="start" name="key-outline"></ion-icon>
       <ion-label position="floating">Confirmar contraseña</ion-label>
       <ion-input formControlName="confirmPassword" type="password"></ion-input>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
 
-    <ion-button expand="block" type="submit" [disabled]="loading">
+    <div class="button-container">
+      <ion-button expand="block" type="submit" [disabled]="loading" class="update-button">
       {{ loading ? 'Actualizando...' : 'Actualizar Perfil' }}
     </ion-button>
+    </div>
+   
   </form>
 </ion-content>
