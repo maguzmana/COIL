@@ -1,12 +1,9 @@
-<!-- tab2.page.html -->
-
-
-
 <ion-header>
   <ion-toolbar>
     <ion-title></ion-title>
     <ion-buttons slot="end">
-      <ion-icon name="search-outline"></ion-icon>
+      <!-- Primer icono con routerLink -->
+      <ion-icon name="search-outline" [routerLink]="['/ejercicios']"></ion-icon>
       <ion-icon name="notifications-outline"></ion-icon>
       <ion-icon name="person-circle-outline"></ion-icon>
     </ion-buttons>
@@ -41,12 +38,11 @@
     </ion-row>
   </ion-toolbar>
   
-
-    <!-- Consejo del día -->
-    <div class="tip-section">
-      <h2>Consejo Del Día</h2>
-      <p>{{dailyTip}}</p>
-    </div>
+  <!-- Consejo del día -->
+  <div class="tip-section">
+    <h2>Consejo Del Día</h2>
+    <p>{{dailyTip}}</p>
+  </div>
 
   <!-- Ejercicios recomendados -->
   <div class="exercises-section">
@@ -77,12 +73,6 @@
       </ion-row>
     </ion-grid>
   </div>
-  
-
- 
-
-
-
 
   <!-- Consejos adicionales -->
   <div class="advice-section">
@@ -117,12 +107,9 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-  
-    
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
-
 
 <ion-fab-button (click)="irAChatBot()" color="">
   <ion-icon name="chatbubbles-outline"></ion-icon>

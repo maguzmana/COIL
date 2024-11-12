@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+  },
+  {
+    path: 'nueva-pagina',  // Ruta a la nueva página
+    loadChildren: () => import('../ejercicios/ejercicios.module').then(m => m.EjerciciosPageModule) // Asegúrate de que la página esté creada
   }
 ];
 

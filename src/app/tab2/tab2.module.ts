@@ -6,6 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { RouterModule, Routes } from '@angular/router';
+import { EjerciciosPage } from '../ejercicios/ejercicios.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: EjerciciosPage
+  }
+];
 
 @NgModule({
   imports: [
