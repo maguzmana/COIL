@@ -5,6 +5,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { OnboardingGuard } from './services/onboarding.guard';
 import { Tab3PageModule } from './tab3/tab3.module';
+import { RecetasPage } from './recetas/recetas.page';
+import { EjerciciosPage } from './ejercicios/ejercicios.page';
 
 const routes: Routes = [
   {
@@ -33,7 +35,8 @@ const routes: Routes = [
   {
     path: 'tab3',
     component: Tab3PageModule
-  },  {
+  },
+  {
     path: 'inicio',
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
   },
@@ -48,8 +51,13 @@ const routes: Routes = [
   {
     path: 'detalle-register',
     loadChildren: () => import('./detalle-register/detalle-register.module').then( m => m.DetalleRegisterPageModule)
+  },
+  { 
+    path: 'recetas', component: RecetasPage
+   },
+  {
+    path: 'ejercicios', component: EjerciciosPage
   }
-
 ];
 
 @NgModule({

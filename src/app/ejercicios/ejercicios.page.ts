@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './ejercicios.page.html',
   styleUrls: ['./ejercicios.page.scss'],
 })
-export class EjerciciosPage implements OnInit {
+export class EjerciciosPage{
 
   ejercicios = [
     { name: 'Parte Superior Del Cuerpo', 
@@ -33,8 +33,5 @@ export class EjerciciosPage implements OnInit {
   ];
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
