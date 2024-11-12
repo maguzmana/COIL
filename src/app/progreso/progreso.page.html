@@ -17,7 +17,7 @@
       <p>86 Kg | 1.96 CM</p>
     </div>
     <ion-avatar>
-      <img src="assets/images/avatar.jpg" />
+      <img src="assets/images/" />
     </ion-avatar>
   </div>
 
@@ -39,25 +39,29 @@
     </ion-grid>
   </div>
 
+  <h4 class="water-tracking-title">Hoy has bebido</h4>
   <div class="water-tracking">
-    <h4>Hoy has bebido:</h4>
-    <ion-card>
-      <ion-card-content>
+    <ion-card class="water-card">
+      <ion-card-content class="water-card-content">
+        <ion-icon name="water-outline" class="water-icon"></ion-icon>
         4 vasos de agua
-        <ion-button fill="clear" size="small"><ion-icon name="add-outline"></ion-icon></ion-button>
+        <ion-button fill="clear" size="small" class="add-button">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
+  
 
-  <h4>Actividades</h4>
-  <ion-card>
+  <h4 class="actividades-title">Actividades</h4>
+  <ion-card class="actividad-card">
     <ion-card-header>
       <ion-card-title>Correr</ion-card-title>
       <ion-card-subtitle>120 Kcal | Duración: 60 Mins</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>Domingo 06 - 9:00 AM</ion-card-content>
   </ion-card>
-</ion-content>
+  
 
 <ion-footer>
   <ion-toolbar>
