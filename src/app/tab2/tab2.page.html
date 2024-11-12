@@ -1,13 +1,19 @@
 <!-- tab2.page.html -->
 
 
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Inicio</ion-title>
+    <ion-title></ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="custom-content">
   <!-- Saludo y detalles del usuario -->
   <div class="welcome-section">
     <h1>Hola, {{userName}}</h1>
