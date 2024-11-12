@@ -29,9 +29,20 @@
   margin-bottom: 5px;
 }
 
-ion-avatar {
-  margin: 10px;
+.custom-avatar {
+  width: 100px; /* Ajusta el tamaño del avatar */
+  height: 100px; /* Mantén la proporción cuadrada */
+  overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+  border-radius: 50%; /* Hace que la imagen sea circular */
 }
+
+.custom-avatar img {
+  width: 100%; /* Asegura que la imagen ocupe todo el contenedor */
+  height: 100%; /* Asegura que la imagen ocupe todo el contenedor */
+  object-fit: cover; /* Ajusta la imagen para que cubra completamente el área del avatar */
+  display: block;
+}
+
 
 ion-item {
   display: flex;

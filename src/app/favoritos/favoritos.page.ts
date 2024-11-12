@@ -27,7 +27,7 @@ export class FavoritosPage { // Elimina implements OnInit
       id: 1,
       nombre: 'Ensalada César',
       calorias: 250,
-      imagen: 'assets/images/ensalada-cesar.jpg'
+      imagen: 'assets/images/ensaladacesar.png'
     },
     {
       id: 2,

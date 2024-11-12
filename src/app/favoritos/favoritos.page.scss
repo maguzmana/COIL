@@ -4,7 +4,9 @@
   background:#ac6fb8;
 }
 
-  
+  ion-padding{
+    color: whitesmoke;
+  }
 
 
 ion-thumbnail {
@@ -45,11 +47,13 @@ ion-thumbnail {
     text-align: center;
   }
   
-  ion-segment {
-    background: var(--ion-color-light);
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
+  ion-segment-button[_ngcontent-ng-c1385440174] {
+    --indicator-color: #d3b3ff;
+}
+
+  ion-segment-button{
+    --indicator-color: #d3b3ff;
+}
   
   ion-segment-button {
     --indicator-color: var(--ion-color-primary);
