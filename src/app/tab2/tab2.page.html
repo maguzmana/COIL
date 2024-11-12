@@ -11,8 +11,36 @@
   <!-- Saludo y detalles del usuario -->
   <div class="welcome-section">
     <h1>Hola, {{userName}}</h1>
-    <p>Es hora de desafiar tus límites.</p>
+    <p class="subtitulo">Es hora de desafiar tus límites.</p>
   </div>
+
+  <ion-toolbar color="" class="custom-toolbar">
+    <ion-row class="icon-bar">
+      <ion-col class="icon-item">
+        <ion-icon name="barbell-outline"></ion-icon>
+        <p>Ejercicios</p>
+      </ion-col>
+      <ion-col class="icon-item">
+        <ion-icon name="clipboard-outline"></ion-icon>
+        <p>Desafíos</p>
+      </ion-col>
+      <ion-col class="icon-item">
+        <ion-icon name="nutrition-outline"></ion-icon>
+        <p>Recetas</p>
+      </ion-col>
+      <ion-col class="icon-item">
+        <ion-icon name="people-outline"></ion-icon>
+        <p>Perfil</p>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  
+
+    <!-- Consejo del día -->
+    <div class="tip-section">
+      <h2>Consejo Del Día</h2>
+      <p>{{dailyTip}}</p>
+    </div>
 
   <!-- Ejercicios recomendados -->
   <div class="exercises-section">
@@ -43,19 +71,10 @@
   </div>
 
 
-  <!-- tab2.page.html -->
-<h1>Hola, {{userName}}</h1>
-
-<div>
-  <p>{{dailyTip}}</p>
-</div>
+ 
 
 
-  <!-- Consejo del día -->
-  <div class="tip-section">
-    <h2>Consejo Del Día</h2>
-    <p>{{dailyTip}}</p>
-  </div>
+
 
   <!-- Consejos adicionales -->
   <div class="advice-section">

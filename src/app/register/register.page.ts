@@ -67,21 +67,22 @@ export class RegisterPage {
     // 'weight', 'height' o 'age' según el campo que esté cambiando
     console.log(`Campo: ${field}, Nuevo valor: ${event.detail.value}`);}
 
-  async onRegister() {
-    if (this.validateForm()) {
-      try {
-        const userData: RegisterUser = {
-          fullName: this.user.fullName,
-          username: this.user.username,
-          password: this.user.password,
-          weight: this.user.weight!,
-          height: this.user.height!,
-          age: this.user.age!,
-          gender: this.user.gender,
-          goal: this.user.goal,
-          physicalActivityLevel: this.user.physicalActivityLevel!,
-          healthConditions: this.user.healthConditions || []
-        };
+    async onRegister() {
+      if (this.validateForm()) {
+          try {
+              console.log('Valor de gender antes de enviar:', this.user.gender); // Verifica el valor
+              const userData: RegisterUser  = {
+                  fullName: this.user.fullName,
+                  username: this.user.username,
+                  password: this.user.password,
+                  weight: this.user.weight!,
+                  height: this.user.height!,
+                  age: this.user.age!,
+                  gender: this.user.gender,
+                  goal: this.user.goal,
+                  physicalActivityLevel: this.user.physicalActivityLevel!,
+                  healthConditions: this.user.healthConditions || []
+              };
 
         console.log('Datos que se enviarán al servidor:', userData);
 
@@ -150,23 +151,24 @@ export class RegisterPage {
 
   validateForm(): boolean {
     return !!(
-      this.user.fullName &&
-      this.user.fullName.trim() &&
-      this.user.username &&
-      this.user.username.trim() &&
-      this.user.password &&
-      this.user.password.trim() &&
-      this.user.weight &&
-      this.user.weight > 0 &&
-      this.user.height &&
-      this.user.height > 0 &&
-      this.user.age &&
-      this.user.age > 0 &&
-      this.user.gender &&
-      this.user.goal &&
-      this.user.physicalActivityLevel !== null
+        this.user.fullName &&
+        this.user.fullName.trim() &&
+        this.user.username &&
+        this.user.username.trim() &&
+        this.user.password &&
+        this.user.password.trim() &&
+        this.user.weight &&
+        this.user.weight > 0 &&
+        this.user.height &&
+        this.user.height > 0 &&
+        this.user.age &&
+        this.user.age > 0 &&
+        this.user.gender && // Asegúrate de que esto tenga un valor
+        this.user.gender.trim() && // Verifica que no esté vacío
+        this.user.goal &&
+        this.user.physicalActivityLevel !== null
     );
-  }
+}
 
   goToLogin() {
     this.navCtrl.navigateForward('/login');

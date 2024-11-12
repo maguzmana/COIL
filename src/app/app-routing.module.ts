@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
+  {
+    path: 'detalle-register',
+    loadChildren: () => import('./detalle-register/detalle-register.module').then( m => m.DetalleRegisterPageModule)
   }
 
 ];
