@@ -125,3 +125,25 @@ ion-checkbox {
   --background: #3a3a3a; /* Fondo del checkbox */
   --color-checked: #6c63ff; /* Color cuando está marcado */
 }
+
+.social-buttons ion-button {
+  --background: linear-gradient(to right, #00bfff, #690f99); /* Gradiente personalizado */
+  --color: white; /* Color del ícono dentro del botón */
+  --border-radius: 50%; /* Hace que los botones sean redondos */
+  width: 50px; /* Ajusta el tamaño del botón */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
+
+  &:hover {
+    filter: brightness(0.9); /* Efecto hover más oscuro */
+  }
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: center;
+}

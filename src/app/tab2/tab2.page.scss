@@ -1,4 +1,3 @@
-/* tab2.page.scss */
 
 .welcome-section {
   text-align: center;
@@ -21,7 +20,7 @@ h2{
 
 .subtitulo{
   margin-top: 16px;
-    font-size: medium;
+    font-size: small;
     text-align: left;
     margin-left: 10px;
 }
@@ -42,7 +41,7 @@ h2{
 }
 
 .custom-toolbar {
-  --background: #1e1e1e; /* Color de fondo oscuro */
+  
   color: #d3b3ff; /* Color de los íconos y texto */
 }
 
@@ -71,11 +70,32 @@ h2{
   
 }
 
+.header-row {
+  display: flex; 
+  justify-content: space-between; /* Coloca el título a la izquierda y el texto a la derecha */
+  align-items: center; /* Alinea verticalmente ambos elementos */
+  margin-bottom: 10px; /* Espacio debajo del encabezado */
+}
+
+
+.ver-mas-text {
+  font-size: small;
+    color: #d3b3ff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+    margin-left: 24px;
+
+  &:hover {
+    color: #ffffff; /* Color al pasar el mouse */
+  }
+}
+
 /* Estilo de las cards */
 ion-card {
   margin-bottom: 10px; /* Reduce el espacio entre las cards */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade un sutil sombreado */
-  width: 48%; /* Ajusta el tamaño de las cards a casi la mitad del contenedor */
+  width: 70%; /* Ajusta el tamaño de las cards a casi la mitad del contenedor */
   display: flex;
   flex-direction: column; /* Asegura que el contenido se apile verticalmente */
   margin-right: 10px; /* Espacio entre las cards */
@@ -109,21 +129,8 @@ ion-card {
   justify-content: space-between; /* Distribuye las cards horizontalmente */
   flex-wrap: nowrap; /* Asegura que las cards estén en una sola fila */
   gap: 10px; /* Espacio entre las cards */
+  width: 107%;
 }
-
-/* En pantallas más pequeñas, ajusta el tamaño de las cards */
-@media (max-width: 768px) {
-  ion-card {
-    width: 48%; /* Dos cards por fila */
-  }
-}
-
-@media (max-width: 480px) {
-  ion-card {
-    width: 48%; /* Mantiene dos cards por fila en pantallas más pequeñas */
-  }
-}
-
 
 
 
@@ -135,11 +142,13 @@ ion-footer {
 
 
 ion-fab-button {
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --background:#ac6fb8; /* Cambia este valor al color que desees */
+  --color: #ffffff; /* Color del ícono dentro del botón */
+ 
   margin-bottom: 20px;
   margin-right: 20px;
 
   &:hover {
-    --background: var(--ion-color-primary-shade);
+    --background: #c29af9;/* Color al pasar el cursor */
   }
 }

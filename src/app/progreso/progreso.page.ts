@@ -1,4 +1,3 @@
-// progreso.page.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./progreso.page.scss'],
 })
 export class ProgresoPage {
-  constructor() { }
+  selectedDate: string;
+
+  constructor() {
+    this.selectedDate = new Date().toISOString(); // Valor inicial
+  }
 }

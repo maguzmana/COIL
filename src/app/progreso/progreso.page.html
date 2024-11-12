@@ -1,17 +1,79 @@
-<!-- progreso.page.html -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Progreso</ion-title>
+    <ion-title>Tu Progreso</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label>
-        <h2>Tu progreso</h2>
-        <p>Aquí podrás ver tus avances</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="progreso-content">
+  <div class="perfil-container">
+    <div class="user-info">
+      <h3>Juan Carlos</h3>
+      <p>Edad: 28 <ion-icon name="male-outline"></ion-icon></p>
+      <p>86 Kg | 1.96 CM</p>
+    </div>
+    <ion-avatar>
+      <img src="assets/images/avatar.jpg" />
+    </ion-avatar>
+  </div>
+
+  <div class="buttons-container">
+    <ion-button expand="block" fill="outline">100 puntos <ion-icon name="trophy-outline"></ion-icon></ion-button>
+    <ion-button expand="block" fill="outline">Racha de 10 días <ion-icon name="flame-outline"></ion-icon></ion-button>
+  </div>
+
+  <div class="calendar">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <!-- Usando el componente ion-datetime con estilo personalizado -->
+          <ion-item>
+            <ion-datetime [(ngModel)]="selectedDate" display-format="DD MMM YYYY" class="custom-datetime"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="water-tracking">
+    <h4>Hoy has bebido:</h4>
+    <ion-card>
+      <ion-card-content>
+        4 vasos de agua
+        <ion-button fill="clear" size="small"><ion-icon name="add-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <h4>Actividades</h4>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Correr</ion-card-title>
+      <ion-card-subtitle>120 Kcal | Duración: 60 Mins</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>Domingo 06 - 9:00 AM</ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="summary">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="star">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="support">
+        <ion-icon name="headset-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-toolbar>
+</ion-footer> 
