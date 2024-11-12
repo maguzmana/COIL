@@ -1,11 +1,12 @@
+<!-- tab2.page.html -->
 <ion-header>
   <ion-toolbar>
     <ion-title></ion-title>
     <ion-buttons slot="end">
-      <!-- Primer icono con routerLink -->
+      <!-- Iconos con routerLink -->
       <ion-icon name="search-outline" [routerLink]="['/ejercicios']"></ion-icon>
-      <ion-icon name="notifications-outline"></ion-icon>
-      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-icon name="notifications-outline" [routerLink]="['/notificaciones']"></ion-icon>
+      <ion-icon name="person-circle-outline" [routerLink]="['/perfil']"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,19 +21,19 @@
   <ion-toolbar color="" class="custom-toolbar">
     <ion-row class="icon-bar">
       <ion-col class="icon-item">
-        <ion-icon name="barbell-outline"></ion-icon>
+        <ion-icon name="barbell-outline" [routerLink]="['/ejercicios']"></ion-icon>
         <p>Ejercicios</p>
       </ion-col>
       <ion-col class="icon-item">
-        <ion-icon name="clipboard-outline"></ion-icon>
+        <ion-icon name="clipboard-outline" [routerLink]="['/desafios']"></ion-icon>
         <p>Desafíos</p>
       </ion-col>
       <ion-col class="icon-item">
-        <ion-icon name="nutrition-outline"></ion-icon>
+        <ion-icon name="nutrition-outline" [routerLink]="['/recetas']"></ion-icon>
         <p>Recetas</p>
       </ion-col>
       <ion-col class="icon-item">
-        <ion-icon name="people-outline"></ion-icon>
+        <ion-icon name="people-outline" [routerLink]="['/perfil']"></ion-icon>
         <p>Perfil</p>
       </ion-col>
     </ion-row>

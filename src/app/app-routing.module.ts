@@ -37,10 +37,6 @@ const routes: Routes = [
     component: Tab3PageModule
   },
   {
-    path: 'inicio',
-    loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule)
-  },
-  {
     path: 'progreso',
     loadChildren: () => import('./progreso/progreso.module').then( m => m.ProgresoPageModule)
   },
@@ -57,7 +53,8 @@ const routes: Routes = [
    },
   {
     path: 'ejercicios', component: EjerciciosPage
-  }
+  },  
+  
 ];
 
 @NgModule({
