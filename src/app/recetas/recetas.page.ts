@@ -1,3 +1,5 @@
+/* recetas.page.ts */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './recetas.page.html',
   styleUrls: ['./recetas.page.scss'],
 })
-export class RecetasPage implements OnInit {
+export class RecetasPage {
 
   recetas = [
     { 
@@ -41,8 +43,5 @@ export class RecetasPage implements OnInit {
   ];
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
