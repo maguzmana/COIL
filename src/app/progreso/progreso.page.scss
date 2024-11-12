@@ -3,13 +3,21 @@
     color: white;
   }
   
+  h4 {
+    margin-top: 16px;
+    font-size: large;
+    text-align: center; /* Centra el título */
+    margin-bottom: -3px; /* Espacio debajo del título */
+}
+
   .perfil-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #d3b3ff; 
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
   }
   
   .user-info h3 {
@@ -37,10 +45,10 @@
   .custom-datetime {
     --padding-start: 10px;
     --padding-end: 10px;
-    --min-width: 100%; /* Asegura que ocupe el 100% del espacio disponible */
-    --background: #d3b3ff; /* Color de fondo personalizado (ajústalo a lo que necesites) */
-    --border-radius: 8px; /* Redondea las esquinas */
-    --color: #007bff; /* Color del texto y los botones */
+    --min-width: 100%;
+    --background: #d3b3ff;
+    --border-radius: 8px;
+    --color: #007bff;
   }
   
   ion-item {
@@ -49,12 +57,81 @@
   
  
   .water-tracking {
-    margin: 10px 0;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    display: flex;
+    justify-content: center; /* Centra el contenedor de la tarjeta */
+    align-items: center;
+  }
+  
+  .water-card {
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      width: 80%; /* Ajusta el ancho de la tarjeta según sea necesario */
+      display: flex;
+      justify-content: center;
+  }
+  
+  .water-card-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      width: 100%;
+      border-radius: 20px;
+      background-color: white;
+      color: black;
+      padding: 10px; /* Ajuste para un padding adecuado */
+  }
+  
+  .water-icon {
+      font-size: 24px; /* Tamaño del icono */
+      margin-right: 10px; /* Espaciado entre el icono y el texto */
+  }
+  
+  .add-button {
+      margin-left: 10px; /* Espaciado entre el texto y el botón */
   }
   
   .calendar {
-    background-color: #232323;
+    background-color: transparent;
     padding: 10px;
     border-radius: 10px;
   }
   
+  .actividades-title {
+    font-size: large;
+    text-align: center; /* Centra el título de actividades */
+    margin-bottom: 15px; /* Espacio debajo del título */
+}
+
+.actividad-card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 80%; /* Ajustado al mismo tamaño de la tarjeta de agua */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 0 auto; /* Esto centra la tarjeta horizontalmente */
+}
+
+.actividad-card ion-card-header {
+    text-align: center; /* Centra el texto en el encabezado de la tarjeta */
+}
+
+.actividad-card ion-card-title,
+.actividad-card ion-card-subtitle {
+    margin-bottom: -14px;
+    font-size: 1.2rem; /* Tamaño de fuente para el título y subtítulo */
+}
+
+.actividad-card ion-card-content {
+    text-align: center; /* Centra el texto dentro del contenido de la tarjeta */
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+}
