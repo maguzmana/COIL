@@ -1,13 +1,26 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón de retroceso -->
+    </ion-buttons>
     <ion-title>Desafíos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="challenges-section">
-    <h2>Desafíos Personalizados</h2>
-    <p>Aquí podrás ver tus desafíos personalizados según tus logros.</p>
-    <!-- Aquí puedes agregar más contenido dinámico, como una lista de desafíos -->
+  <div class="desafios-container">
+    <ion-card *ngFor="let desafio of desafios">
+      <img [src]="desafio.imagen" alt="Imagen Desafío"/>
+      <ion-card-header>
+        <ion-card-title>{{ desafio.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ desafio.subtitulo }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ desafio.descripcion }}</p>
+        <ion-button expand="full" color="primary" (click)="verDetalles(desafio.id)">
+          Ver más
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

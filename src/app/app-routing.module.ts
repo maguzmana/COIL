@@ -57,7 +57,6 @@ const routes: Routes = [
     path: 'desafios',
     loadChildren: () => import('./desafios/desafios.module').then( m => m.DesafiosPageModule)
   },
- 
   
 ];
 
