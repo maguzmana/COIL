@@ -3,3 +3,37 @@
     display: block;
     padding: 16px;
   }
+
+  .general{
+    border-radius: 16px;
+    border: 2px solid #d3b3ff;
+    --border-radius: 12px;
+    --background: transparent;
+    color: #d3b3ff;
+    font-weight: bold;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    margin-top: 21px;
+  
+  }
+
+  p{
+    color: black;
+  }
+
+  .titulo{
+    color: black;
+  }
+ 
+  h2{
+    color: black;
+  }
+
+  ion-card{
+    color: black;
+    background: white;
+  }
+
+ .desafio-general-container{
+  background: white;
+ }

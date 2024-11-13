@@ -1,12 +1,38 @@
-/* desafios.page.scss */
-
 .desafios-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-  }
-  
+  display: flex;
+  flex-direction: column; /* Coloca los botones en una columna */
+  align-items: center; /* Centra los botones horizontalmente */
+  width: 100%;
+  gap: 16px; /* Espaciado entre botones (opcional) */
+  margin-top: 41px;
+}
+
+.semanal-button, 
+.general-button {
+  width: 80%;
+  max-width: 300px;
+  --background: #d3b3ff;;
+  --border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
+  text-transform: none;
+  margin: 0; /* Elimina márgenes innecesarios */
+}
+
+.desafio-button{
+  --background: #d3b3ff;;
+color: white;
+
+}
+
+.ion-button{
+  --background: #d3b3ff;
+
+}
+
+
+
   ion-card {
     border-radius: 12px;
     overflow: hidden;
