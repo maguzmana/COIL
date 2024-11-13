@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/desafios"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Desafio General</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class="desafio-general-container">
+      <img [src]="desafioGeneral.imagen" alt="Imagen Desafío General"/>
+      <h2>{{ desafioGeneral.titulo }}</h2>
+      <p>{{ desafioGeneral.descripcion }}</p>
+      <ion-button expand="full" color="primary" (click)="completarDesafio()">
+        Completar Desafío General
+      </ion-button>
+    </div>
+  </ion-content>

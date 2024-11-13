@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón de retroceso -->
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
     <ion-title>Desafíos</ion-title>
   </ion-toolbar>
@@ -9,18 +9,11 @@
 
 <ion-content>
   <div class="desafios-container">
-    <ion-card *ngFor="let desafio of desafios">
-      <img [src]="desafio.imagen" alt="Imagen Desafío"/>
-      <ion-card-header>
-        <ion-card-title>{{ desafio.titulo }}</ion-card-title>
-        <ion-card-subtitle>{{ desafio.subtitulo }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <p>{{ desafio.descripcion }}</p>
-        <ion-button expand="full" color="primary" (click)="verDetalles(desafio.id)">
-          Ver más
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+    <ion-button expand="full" color="primary" routerLink="/desafios/semanales">
+      Desafios Semanales
+    </ion-button>
+    <ion-button expand="full" color="secondary" routerLink="/desafios/general">
+      Desafio General
+    </ion-button>
   </div>
 </ion-content>
