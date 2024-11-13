@@ -9,7 +9,7 @@ export class DesafioGeneralPage {
   desafioGeneral = {
     titulo: 'Desafío de Vida Saludable',
     descripcion: 'Un desafío que combina ejercicio, buena alimentación y descanso.',
-    imagen: 'assets/img/general.jpg',
+    imagen: 'assets/general.jpg',
     puntos: 50,
   };
 

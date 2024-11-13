@@ -12,7 +12,7 @@ export class DesafiosSemanalesPage {
       titulo: 'Campeón del Movimiento',
       subtitulo: '30 minutos de ejercicio',
       descripcion: 'Realiza 30 minutos de actividad física, como bailar, caminar, correr o yoga.',
-      imagen: 'assets/img/campeon.jpg',
+      imagen: 'assets/campeon.jpg',
       duracion: '30 minutos',
       calorias: '12 Kcal',
       nivel: 'Principiante',

@@ -14,31 +14,31 @@ export class RecetasPage {
       name: 'Smoothie Frutal', 
       duration: '10 Minutos', 
       calories: '120 Cal', 
-      image: 'assets/images/smoothie.jpg' 
+      image: 'assets/smoothie.jpg' 
     },
     { 
       name: 'Ensalada Con Quinoa', 
       duration: '20 Minutos', 
       calories: '150 Cal', 
-      image: 'assets/images/ensalada.jpg' 
+      image: 'assets/ensalada.jpg' 
     },
     { 
       name: 'Tostadas de Aguacate', 
       duration: '15 Minutos', 
       calories: '200 Cal', 
-      image: 'assets/images/pan.jpg' 
+      image: 'assets/pan.jpg' 
     },
     { 
       name: 'Sopa de Lentejas', 
       duration: '30 Minutos', 
       calories: '180 Cal', 
-      image: 'assets/images/sopa.jpg' 
+      image: 'assets/sopa.jpg' 
     },
     { 
       name: 'Pasta al Pesto', 
       duration: '25 Minutos', 
       calories: '300 Cal', 
-      image: 'assets/images/pasta.jpg' 
+      image: 'assets/pasta.jpg' 
     },
   ];
 
