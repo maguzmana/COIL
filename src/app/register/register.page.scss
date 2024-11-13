@@ -1,147 +1,35 @@
-body {
-    
-    
+// src/app/pages/register/register.page.scss
+.progress-bar {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-ion-content {
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
-    padding: 16px; /* Espaciado interno */
-}
-
-.custom-content {
- --background: #080d4f; /* Color de fondo del contenido */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
-    padding: 16px;
-}
-
-
-.form-container {
-    margin-top: 10px; /* Ajusta este valor según la distancia que quieras desde la parte superior */
-    
-}
-
-
-.image-container {
-    display: flex;
-    justify-content: center; /* Centra la imagen horizontalmente */
-    align-items: center; /* Centra la imagen verticalmente */
-    width: 100%;
-}
-
-.slide-image {
-    max-width: 18%; /* Ajusta el ancho de la imagen */
-    height: auto;
-    border-radius: 8px;
-    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(400%) hue-rotate(270deg);
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-
+    justify-content: space-around;
+    margin: 20px 0;
+  }
   
-
-h2 {
-    margin-top: 18px;
-    font-size: 23px;
+  .step {
+    position: relative;
+    padding: 10px;
+    font-size: 14px;
+    color: #999;
+    border-bottom: 2px solid #ddd;
+    transition: color 0.3s, border-color 0.3s;
+  
+    &.active {
+      color: #3880ff;
+      border-color: #3880ff;
+    }
+  }
+  
+  h3 {
     text-align: center;
-  }
-
-ion-content {
-    background-color: #080d4f;  /* Color de fondo del contenido */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    height: 100%; /* Asegura que el contenido ocupe el 100% de la altura */
-}
-
-
-
-ion-item {
-    --background: transparent; /* Fondo transparente para evitar el bloque negro */
-    --inner-padding: 0px; /* Opcional: ajusta el padding interno */
-    --border-color: transparent; /* Elimina bordes oscuros si los hay */
-    width: 100%; /* Asegura que cada item ocupe todo el ancho */
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column; /* Asegura que los labels estén arriba de los inputs */
-    align-items: flex-start; /* Alinea horizontalmente al inicio (izquierda) */
-    text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+    margin-top: 20px;
+    color: #333;
   }
   
-  ion-label {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    color: #ffffff; /* Mantiene el texto del label en blanco */
-    font-size: 14px; /* Ajusta el tamaño del texto según tu preferencia */
-    font-weight: bold; /* Hace que el texto resalte */
-    margin-bottom: 5px; /* Añade espacio entre el label y el input */
-    text-align: left; /* Asegura la alineación izquierda */
+  ion-item {
+    margin: 10px 0;
   }
   
-
-.input-container[_ngcontent-ng-c648470614] {
-    background: #ffffff; /* Fondo blanco para el campo de entrada */
-    border-radius: 10px; /* Bordes redondeados solo en el input */
-    padding: 2px 16px; /* Espaciado interno para el input */
-    color: #000000; /* Color del texto en el input */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-}
-
-
-.input-container {
-    background: #ffffff; /* Fondo blanco */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 0px 16px; /* Espaciado interno */
-    color: #000000; /* Color del texto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    width: 100%; /* Abarca todo el ancho */
-}
-
-.custom-label {
-    color: #ffffff; /* Color blanco para los labels */
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px; /* Separación del input */
-    text-align: center;
-}
-
-.custom-item{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    text-align: center; /* Centra el texto */
-}
-
-/* Centrado del contenedor del botón */
-.button-container {
-    display: flex;
-    justify-content: center; /* Centra el botón horizontalmente */
-    width: 100%; /* Abarca el ancho del contenedor */
-}
-
-/* Ajuste de estilo para el botón */
-.register-button {
-    margin-top: 20px; /* Espacio superior para separación */
-    width: 80%; /* Ajusta el ancho del botón */
-    max-width: 300px; /* Ancho máximo para el botón */
-    --background: rgba(255, 255, 255, 0.1);
-    --border-radius: 20px; /* Bordes redondeados */
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra */
-    text-transform: none;
-}
+  ion-button {
+    margin-top: 20px;
+  }
+  

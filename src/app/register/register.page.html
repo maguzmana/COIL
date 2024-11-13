@@ -1,99 +1,71 @@
-<!-- register.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content class="custom-content">
-  <h2>Crear cuenta </h2>
-  <div class="image-container">
-    <img src="assets/user.png" alt="FitFocus Logo" class="slide-image" />
-  </div>
+<ion-content>
   <div class="form-container">
     <form (ngSubmit)="onRegister()">
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Nombre completo</ion-label>
-        <div class="input-container">
-          <ion-input type="text" [(ngModel)]="user.fullName" name="fullName" required></ion-input>
-        </div>
-      </ion-item>
-
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Nombre de usuario</ion-label>
-        <div class="input-container">
-          <ion-input type="text" [(ngModel)]="user.username" name="username" required></ion-input>
-        </div>  
-      </ion-item>
-      
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Contraseña</ion-label>
-        <div class="input-container">
-          <ion-input type="password" [(ngModel)]="user.password" name="password" required minlength="8"></ion-input>
-        </div>
-      </ion-item>
-      
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Peso (kg)</ion-label>
-        <div class="input-container">
-          <ion-input type="number" [(ngModel)]="user.weight" (ionChange)="onNumberInput($event, 'weight')" name="weight" required></ion-input>
-        </div>
-      </ion-item>
-      
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Altura (cm)</ion-label>
-        <div class="input-container">
-          <ion-input type="number" [(ngModel)]="user.height" (ionChange)="onNumberInput($event, 'height')" name="height" required></ion-input>
-        </div>
-      </ion-item>
-      
-      <ion-item class="custom-item">
-        <ion-label position="stacked">Edad</ion-label>
-        <div class="input-container">
-          <ion-input type="number" [(ngModel)]="user.age" (ionChange)="onNumberInput($event, 'age')" name="age" required></ion-input>
-        </div>
-      </ion-item> 
-
-      <ion-item class="custom-item centered-select-container">
-        <ion-label>Género</ion-label>
-        <ion-select [(ngModel)]="user.gender" name="gender" required>
-            <ion-select-option value="male">Masculino</ion-select-option>
-            <ion-select-option value="female">Femenino</ion-select-option>
-            <ion-select-option value="other">Otro</ion-select-option>
-        </ion-select>
-    </ion-item>
-
-      <ion-item class="custom-item centered-select-container">
-        <ion-label>Objetivo</ion-label>
-        <ion-select [(ngModel)]="user.goal" name="goal" required>
-          <ion-select-option value="lose_weight">Perder peso</ion-select-option>
-          <ion-select-option value="gain_muscle">Ganar músculo</ion-select-option>
-          <ion-select-option value="health_maintenance">Mantenerme en forma</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item class="custom-item centered-select-container">
-        <ion-label>Nivel de actividad física</ion-label>
-        <ion-select [(ngModel)]="user.physicalActivityLevel" name="physicalActivityLevel" required>
-          <ion-select-option value="1.2">Sedentario</ion-select-option>
-          <ion-select-option value="1.375">Ligeramente activo</ion-select-option>
-          <ion-select-option value="1.55">Moderadamente activo</ion-select-option>
-          <ion-select-option value="1.725">Muy activo</ion-select-option>
-          <ion-select-option value="1.9">Extremadamente activo</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item class="custom-item centered-select-container">
-        <ion-label>Condiciones de salud</ion-label>
-        <ion-select [(ngModel)]="user.healthConditions" name="healthConditions" multiple="true">
-          <ion-select-option value="diabetes">Diabetes</ion-select-option>
-          <ion-select-option value="hypertension">Hipertensión</ion-select-option>
-          <ion-select-option value="kidney_disease">Enfermedad renal</ion-select-option>
-          <ion-select-option value="none">Ninguna</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <div class="button-container">
-        <ion-button expand="block" type="submit" class="register-button">Siguiente</ion-button>
+      <div *ngIf="currentStep === 1">
+        <h2>Información Básica</h2>
+        <ion-item>
+          <ion-label position="floating">Nombre Completo</ion-label>
+          <ion-input type="text" [(ngModel)]="registerForm.full_name" name="full_name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-input type="text" [(ngModel)]="registerForm.username" name="username" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="registerForm.password" name="password" required></ion-input>
+        </ion-item>
+        <ion-button expand="full" class="next-button" (click)="nextStep()">Siguiente</ion-button>
       </div>
 
+      <div *ngIf="currentStep === 2">
+        <h2>Información Adicional</h2>
+        <ion-item>
+          <ion-label position="floating">Peso (kg)</ion-label>
+          <ion-input type="number" [(ngModel)]="registerForm.weight" name="weight" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Altura (cm)</ion-label>
+          <ion-input type="number" [(ngModel)]="registerForm.height" name="height" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Edad</ion-label>
+          <ion-input type="number" [(ngModel)]="registerForm.age" name="age" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Género</ion-label>
+          <ion-select [(ngModel)]="registerForm.gender" name="gender" required>
+            <ion-select-option value="male">Masculino</ion-select-option>
+            <ion-select-option value="female">Femenino</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Objetivo</ion-label>
+          <ion-select [(ngModel)]="registerForm.goal" name="goal" required>
+            <ion-select-option value="weight_loss">Pérdida de Peso</ion-select-option>
+            <ion-select-option value="muscle_gain">Aumento de Masa Muscular</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nivel de Actividad Física</ion-label>
+          <ion-select [(ngModel)]="registerForm.physical_activity_level" name="physical_activity_level" required>
+            <ion-select-option value="sedentary">Sedentario</ion-select-option>
+            <ion-select-option value="active">Activo</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Condiciones de Salud</ion-label>
+          <ion-input type="text" [(ngModel)]="registerForm.health_conditions" name="health_conditions"></ion-input>
+        </ion-item>
+        <ion-button expand="full" class="prev-button" (click)="prevStep()">Anterior</ion-button>
+        <ion-button expand="full" type="submit">Registrar</ion-button>
+      </div>
     </form>
-
-    <ion-button expand="full" fill="clear" (click)="goToLogin()">¿Ya tienes una cuenta? Inicia sesión</ion-button>
   </div>
 </ion-content>
