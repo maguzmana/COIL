@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/desafios"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Desafios Semanales</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class="desafios-container">
+      <ion-card *ngFor="let desafio of desafios">
+        <img [src]="desafio.imagen" alt="Imagen Desafío" (click)="verDetalles(desafio.id)"/>
+        <ion-card-header>
+          <ion-card-title>{{ desafio.titulo }}</ion-card-title>
+          <ion-card-subtitle>{{ desafio.duracion }} - {{ desafio.calorias }} - {{ desafio.nivel }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ desafio.descripcion }}</p>
+          <ion-button expand="full" color="primary" (click)="completarDesafio(desafio)">
+            Completar Desafío
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
