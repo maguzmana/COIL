@@ -26,12 +26,15 @@ ion-content {
 }
 
 .form-container {
-  width: 90%; /* Ajusta el ancho del formulario */
-  max-width: 400px; /* Tamaño máximo del formulario */
+  width: 90%;
+  max-width: 400px;
   padding: 20px;
-  background-color:#222764; /* Fondo de la tarjeta cambiado a gris */
+  background-color: #222764;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del contenedor */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 18px;
+  margin-top: 72px;
+  margin-left: 20px;
 }
 
 
@@ -65,7 +68,7 @@ ion-label {
 }
 
 ion-input {
-  color: #000000;
+  color: white;
 }
 
 .next-button,
