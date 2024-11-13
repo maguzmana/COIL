@@ -1,1 +1,16 @@
 
+ion-tab-bar {
+    --background: #d3b3ff; /* Color de fondo personalizado */
+    --color-selected: white; /* Color de texto e iconos seleccionados */
+    --color: black; /* Color de texto e iconos no seleccionados */
+    border-top: 1px solid #b399e0; /* Línea superior opcional */
+  }
+
+
+  ion-icon{
+    color: white;
+  }
+
+  ion-label{
+    color: white;
+  }

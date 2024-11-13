@@ -57,7 +57,11 @@ const routes: Routes = [
     path: 'desafios',
     loadChildren: () => import('./desafios/desafios.module').then( m => m.DesafiosPageModule)
   },
-  
+  {
+    path: 'tab3',
+    loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule),
+    canActivate: [OnboardingGuard]
+  },
 ];
 
 @NgModule({

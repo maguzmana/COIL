@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'nueva-pagina',  // Ruta a la nueva página
     loadChildren: () => import('../ejercicios/ejercicios.module').then(m => m.EjerciciosPageModule) // Asegúrate de que la página esté creada
+  },
+  {
+    path: 'nueva-pagina',  // Ruta a la nueva página
+    loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule) // Asegúrate de que la página esté creada
   }
 ];
 
