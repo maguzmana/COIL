@@ -1,35 +1,83 @@
-// src/app/pages/register/register.page.scss
-.progress-bar {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-  }
-  
-  .step {
-    position: relative;
-    padding: 10px;
-    font-size: 14px;
-    color: #999;
-    border-bottom: 2px solid #ddd;
-    transition: color 0.3s, border-color 0.3s;
-  
-    &.active {
-      color: #3880ff;
-      border-color: #3880ff;
-    }
-  }
-  
-  h3 {
-    text-align: center;
-    margin-top: 20px;
-    color: #333;
-  }
-  
-  ion-item {
-    margin: 10px 0;
-  }
-  
-  ion-button {
-    margin-top: 20px;
-  }
-  
+ion-content {
+  --background: #080d4f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.header-toolbar {
+  --background: transparent;
+  --ion-title-color: #ffffff;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 350px;
+  background-color: #1a1b5e;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.icon-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 70px;
+  color: #6a0dad;
+}
+
+h2 {
+  font-size: 23px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.custom-input ion-item {
+  --background: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  --color: #000000;
+  padding: 4px 10px;
+}
+
+ion-label {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+ion-input {
+  color: #000000;
+}
+
+.next-button,
+.prev-button,
+.submit-button {
+  --background: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.5);
+  --border-radius: 20px; /* Bordes redondeados para el botón ovalado */
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  width: 100%;
+  max-width: 300px;
+  text-transform: none;
+}
+
+.terms-text {
+  font-size: 12px;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.terms-link {
+  color: #6a0dad;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
