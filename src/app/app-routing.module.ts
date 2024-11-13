@@ -53,7 +53,11 @@ const routes: Routes = [
    },
   {
     path: 'ejercicios', component: EjerciciosPage
-  },  
+  },   {
+    path: 'desafios',
+    loadChildren: () => import('./desafios/desafios.module').then( m => m.DesafiosPageModule)
+  },
+ 
   
 ];
 
