@@ -27,13 +27,13 @@ export class FavoritosPage { // Elimina implements OnInit
       id: 1,
       nombre: 'Ensalada César',
       calorias: 250,
-      imagen: 'assets/images/ensaladacesar.png'
+      imagen: 'assets/ensaladacesar.png'
     },
     {
       id: 2,
       nombre: 'Pollo a la plancha',
       calorias: 165,
-      imagen: 'assets/images/pollo-plancha.jpg'
+      imagen: 'assets/pollo-plancha.webp'
     }
   ];
 
@@ -43,14 +43,14 @@ export class FavoritosPage { // Elimina implements OnInit
       nombre: 'Caminata',
       duracion: '30 minutos',
       calorias: 150,
-      imagen: 'assets/images/caminata.jpg'
+      imagen: 'assets/caminata.jpg'
     },
     {
       id: 2,
       nombre: 'Yoga',
       duracion: '45 minutos',
       calorias: 200,
-      imagen: 'assets/images/yoga.jpg'
+      imagen: 'assets/yoga.jpg'
     }
   ];
 
