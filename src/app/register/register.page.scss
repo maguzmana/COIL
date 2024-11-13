@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+/* register.page.scss */
+
+ion-content {
+  --background: #080d4f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+>>>>>>> 492d241d14af1b775538ed5498853875a1b20476
 
 .header-toolbar {
   --background: transparent;
@@ -81,4 +94,15 @@ ion-input {
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link {
+  color: #6a0dad; // Cambia el color según tu diseño
+  text-decoration: underline;
+  cursor: pointer;
 }
