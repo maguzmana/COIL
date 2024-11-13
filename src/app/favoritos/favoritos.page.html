@@ -1,18 +1,32 @@
 <ion-header>
-  <ion-toolbar color="">
-    <ion-title>Mis Favoritos</ion-title>
+  <ion-toolbar class="toolbar-background">
+    <ion-title>Favoritos</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <ion-segment value="comidas" mode="ios" class="ion-padding">
-    <ion-segment-button value="comidas">
-      <ion-label>Comidas</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="ejercicios">
-      <ion-label>Ejercicios</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <!-- Filtros de favoritos -->
+  <div class="filters">
+    <ion-segment value="todos" class="ion-padding">
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="videos">
+        <ion-label>Videos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="articulos">
+        <ion-label>Artículos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
 
   <!-- Sección de Comidas -->
   <ion-list>

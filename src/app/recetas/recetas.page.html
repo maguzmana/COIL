@@ -1,28 +1,45 @@
 <!-- recetas.page.html -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="toolbar-background">
+    <ion-title>Favoritos</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón de retroceso -->
     </ion-buttons>
-    <ion-title>Recetas</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!-- Filtros de recetas -->
+
   <div class="recipe-filters">
-    <ion-chip color="primary">Planes de comida</ion-chip>
-    <ion-chip color="secondary">Ideas de comida</ion-chip>
+    <ion-segment value="todos" class="ion-padding">
+      <ion-segment-button value="planes">
+        <ion-label>Planes de comida</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="ideas">
+        <ion-label>Ideas de comida</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </div>
 
+
+
   <!-- Receta del día -->
-  <ion-card>
-    <img src="ruta_receta_dia" />
+  <ion-card class="receta-card">
+    <div class="custom-avatar">
+      <img src="assets/ensaladacesar.png" alt="user" />
+    </div>
     <ion-card-content>
-      <h2>Smoothie De Zanahoria Y Naranja</h2>
-      <p>10 Minutos | 70 Cal</p>
+      <h2>Smoothie de Zanahoria y Naranja</h2>
+      <p>10 Minutos | 70 Cal </p>
     </ion-card-content>
   </ion-card>
+
 
   <!-- Sección de recomendaciones -->
   <h3>Recomendados</h3>

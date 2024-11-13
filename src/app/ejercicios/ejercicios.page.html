@@ -1,21 +1,33 @@
 <!-- ejercicios.page.html -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="toolbar-background">
+    <ion-title>Ejercicios</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón de retroceso -->
     </ion-buttons>
-    <ion-title>Ejercicios</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!-- Filtros de dificultad -->
-  <div class="difficulty-filters">
-    <ion-chip color="primary">Principiante</ion-chip>
-    <ion-chip color="secondary">Intermedio</ion-chip>
-    <ion-chip color="tertiary">Avanzado</ion-chip>
+  <div class="filters">
+    <ion-segment value="todos" class="ion-padding">
+      <ion-segment-button value="todos">
+        <ion-label>Principiante</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="videos">
+        <ion-label>Intermedio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="articulos">
+        <ion-label>Avanzado</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </div>
-
   <!-- Entrenamiento del día -->
   <ion-card class="entrenamiento-card">
     <div class="custom-avatar">

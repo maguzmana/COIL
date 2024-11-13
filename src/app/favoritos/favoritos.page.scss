@@ -1,60 +1,58 @@
-// favoritos.page.scss
-
 .toolbar-background {
-  background:#ac6fb8;
+  
+  --background: none;
+  color: white;
 }
 
-  ion-padding{
-    color: whitesmoke;
-  }
+h1{
+  font-size: large;
+}
 
+
+.filters {
+  padding: 0 16px;
+  margin-top: 8px;
+  color: transparent;
+}
+
+ion-segment {
+ 
+  border-radius: 16px;
+}
+
+ion-segment-button {
+  --color-checked: white; /* Texto cuando está seleccionado */
+  --indicator-color: #d3b3ff; /* Color del indicador */
+  --background-checked: transparent; /* Fondo transparente para seleccionado */
+  color: white;
+}
+
+ion-item {
+  --background: white; /* Fondo oscuro para las tarjetas */
+  border-radius: 10px;
+  margin: 8px 16px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra */
+}
 
 ion-thumbnail {
-    --size: 80px;
-    margin: 10px;
-  }
-  
-  ion-list-header {
-    background: transparent;
-    padding-top: 2px;
-    padding-bottom: 16px;
-  }
-  
-  ion-list-header h1 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-  }
-  
-  ion-item {
-    background-color: white !important; /* Asegura que el fondo blanco se aplique */
-    margin-bottom: 10px !important; /* Espaciado entre los ítems */
-    border-radius: 10px !important; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* Sombra sutil */
-  }
-
-  ion-item-sliding ion-item {
-    background-color: white !important;
-    margin-bottom: 10px !important;
-    border-radius: 10px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  
-  
-  ion-card {
-    margin: 20px;
-    text-align: center;
-  }
-  
-  ion-segment-button[_ngcontent-ng-c1385440174] {
-    --indicator-color: #d3b3ff;
+  border-radius: 8px;
 }
 
-  ion-segment-button{
-    --indicator-color: #d3b3ff;
+ion-label h2 {
+  font-weight: bold;
+  color: black;
 }
-  
-  ion-segment-button {
-    --indicator-color: var(--ion-color-primary);
-  }
+
+ion-label p {
+  color: #4d4d4d;
+}
+
+ion-icon {
+  color: white;
+}
+
+ion-thumbnail img {
+  object-fit: cover; /* Asegura que las imágenes llenen el espacio */
+  width: 100%; /* Imagen ocupa todo el thumbnail */
+  height: 100%;
+}

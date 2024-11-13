@@ -16,3 +16,22 @@
   .difficulty-filters{
    
   }
+
+  .filters {
+    padding: 0 16px;
+    margin-top: 8px;
+    color: transparent;
+  }
+  
+  ion-segment {
+   
+    border-radius: 16px;
+  }
+  
+  ion-segment-button {
+    --color-checked: white; /* Texto cuando está seleccionado */
+    --indicator-color: #d3b3ff; /* Color del indicador */
+    --background-checked: transparent; /* Fondo transparente para seleccionado */
+    color: white;
+  }
+  
