@@ -1,3 +1,5 @@
+/* register.page.scss */
+
 ion-content {
   --background: #080d4f;
   display: flex;
@@ -80,4 +82,15 @@ ion-input {
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link {
+  color: #6a0dad; // Cambia el color según tu diseño
+  text-decoration: underline;
+  cursor: pointer;
 }
