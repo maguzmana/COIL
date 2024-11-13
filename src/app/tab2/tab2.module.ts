@@ -8,11 +8,16 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { EjerciciosPage } from '../ejercicios/ejercicios.page';
+import { Tab3Page } from '../tab3/tab3.page';
 
 const routes: Routes = [
   {
     path: '',
     component: EjerciciosPage
+  },
+  {
+    path: '',
+    component: Tab3Page
   }
 ];
 
