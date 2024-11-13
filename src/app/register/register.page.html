@@ -1,71 +1,61 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Registro</ion-title>
+  <ion-toolbar class="header-toolbar">
+    <ion-title>Crear Cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="form-container">
+    <div class="icon-container">
+      <ion-icon name="person-circle-outline" class="icon"></ion-icon>
+    </div>
+
     <form (ngSubmit)="onRegister()">
       <div *ngIf="currentStep === 1">
-        <h2>Información Básica</h2>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Nombre Completo</ion-label>
           <ion-input type="text" [(ngModel)]="registerForm.full_name" name="full_name" required></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Nombre de Usuario</ion-label>
           <ion-input type="text" [(ngModel)]="registerForm.username" name="username" required></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input type="password" [(ngModel)]="registerForm.password" name="password" required></ion-input>
         </ion-item>
-        <ion-button expand="full" class="next-button" (click)="nextStep()">Siguiente</ion-button>
+
+        <ion-button expand="block" class="next-button" (click)="nextStep()">Siguiente</ion-button>
       </div>
 
       <div *ngIf="currentStep === 2">
-        <h2>Información Adicional</h2>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Peso (kg)</ion-label>
           <ion-input type="number" [(ngModel)]="registerForm.weight" name="weight" required></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Altura (cm)</ion-label>
           <ion-input type="number" [(ngModel)]="registerForm.height" name="height" required></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Edad</ion-label>
           <ion-input type="number" [(ngModel)]="registerForm.age" name="age" required></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="custom-input">
           <ion-label position="floating">Género</ion-label>
           <ion-select [(ngModel)]="registerForm.gender" name="gender" required>
             <ion-select-option value="male">Masculino</ion-select-option>
             <ion-select-option value="female">Femenino</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item>
-          <ion-label position="floating">Objetivo</ion-label>
-          <ion-select [(ngModel)]="registerForm.goal" name="goal" required>
-            <ion-select-option value="weight_loss">Pérdida de Peso</ion-select-option>
-            <ion-select-option value="muscle_gain">Aumento de Masa Muscular</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Nivel de Actividad Física</ion-label>
-          <ion-select [(ngModel)]="registerForm.physical_activity_level" name="physical_activity_level" required>
-            <ion-select-option value="sedentary">Sedentario</ion-select-option>
-            <ion-select-option value="active">Activo</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Condiciones de Salud</ion-label>
-          <ion-input type="text" [(ngModel)]="registerForm.health_conditions" name="health_conditions"></ion-input>
-        </ion-item>
+
         <ion-button expand="full" class="prev-button" (click)="prevStep()">Anterior</ion-button>
-        <ion-button expand="full" type="submit">Registrar</ion-button>
+        <ion-button expand="full" type="submit" class="submit-button">Registrar</ion-button>
       </div>
     </form>
+
+    <p class="terms-text">
+      Al continuar, aceptas los <span class="terms-link">términos de uso</span> y la <span class="terms-link">política de privacidad</span>.
+    </p>
   </div>
 </ion-content>
