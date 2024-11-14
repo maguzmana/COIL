@@ -1,3 +1,4 @@
+
 /* register.page.scss */
 
 ion-content {
@@ -9,20 +10,33 @@ ion-content {
   padding: 20px;
 }
 
+
 .header-toolbar {
   --background: transparent;
   --ion-title-color: #ffffff;
 }
 
-.form-container {
-  width: 100%;
-  max-width: 350px;
-  background-color: #1a1b5e;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  text-align: center;
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+  --background: #080d4f;
 }
+
+.form-container {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #222764;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 18px;
+  margin-top: 70px;
+  margin-left: 20px;
+}
+
 
 .icon-container {
   text-align: center;
@@ -54,7 +68,7 @@ ion-label {
 }
 
 ion-input {
-  color: #000000;
+  color: white;
 }
 
 .next-button,
