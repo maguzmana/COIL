@@ -1,5 +1,3 @@
-<!-- register.page.html -->
-
 <ion-header>
   <ion-toolbar class="header-toolbar">
     <ion-title>Crear Cuenta</ion-title>
@@ -51,8 +49,39 @@
           </ion-select>
         </ion-item>
 
-        <ion-button expand=" block" class="prev-button" (click)="prevStep()">Anterior</ion-button>
-        <ion-button expand="block" type="submit" class="submit-button">Registrar</ion-button>
+        <!-- Objetivo -->
+        <ion-item class="custom-input">
+          <ion-label position="floating">Objetivo</ion-label>
+          <ion-select [(ngModel)]="registerForm.goal" name="goal" required>
+            <ion-select-option value="lose_weight">Perder peso</ion-select-option>
+            <ion-select-option value="gain_muscle">Ganar musculatura</ion-select-option>
+            <ion-select-option value="maintain_shape">Mantenerse en forma</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Nivel de Actividad Física -->
+        <ion-item class="custom-input">
+          <ion-label position="floating">Nivel de Actividad Física</ion-label>
+          <ion-select [(ngModel)]="registerForm.physical_activity_level" name="physical_activity_level" required>
+            <ion-select-option value="1">Bajo</ion-select-option>
+            <ion-select-option value="2">Moderado</ion-select-option>
+            <ion-select-option value="3">Alto</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Condiciones de salud -->
+        <ion-item class="custom-input">
+          <ion-label position="floating">Condiciones de Salud</ion-label>
+          <ion-select [(ngModel)]="registerForm.health_conditions" name="health_conditions" required>
+            <ion-select-option value="diabetes">Diabetes</ion-select-option>
+            <ion-select-option value="hypertension">Hipertensión</ion-select-option>
+            <ion-select-option value="kidney_disease">Enfermedad renal</ion-select-option>
+            <ion-select-option value="none">Ninguna</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="full" class="prev-button" (click)="prevStep()">Anterior</ion-button>
+        <ion-button expand="full" type="submit" class="submit-button">Registrar</ion-button>
       </div>
     </form>
 
@@ -63,6 +92,6 @@
     <p class="login-text">
       ¿Ya tienes una cuenta? <a routerLink="/login" class="login-link">Iniciar sesión</a>
     </p>
-    
+
   </div>
 </ion-content>

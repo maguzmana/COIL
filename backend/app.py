@@ -124,7 +124,7 @@ def register():
     # Validación de campos requeridos
     required_fields = [
         'username', 'password', 'fullName', 'weight', 'height', 
-        'age', ' gender', 'goal', 'physicalActivityLevel', 'healthConditions'
+        'age', 'gender', 'goal', 'physicalActivityLevel', 'healthConditions'
     ]
     for field in required_fields:
         if field not in data or not data[field]:
