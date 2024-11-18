@@ -16,6 +16,12 @@ ion-content {
   --ion-title-color: #ffffff;
 }
 
+
+ion-card-subtitle {
+  margin-top: 10px;
+  color: #bbbbbb;
+}
+
 ion-content {
   display: flex;
   flex-direction: column;
@@ -46,6 +52,7 @@ ion-content {
 .icon {
   font-size: 70px;
   color: #6a0dad;
+    margin-top: 20px;
 }
 
 h2 {
@@ -62,14 +69,37 @@ h2 {
   padding: 4px 10px;
 }
 
+
 ion-label {
-  color: #ffffff;
-  font-size: 14px;
+  color: white;
+  font-size: 14px; /* Opcional: ajusta el tamaño de la fuente si lo necesitas */
+  font-weight: bold; /* Opcional: hazlo más destacado */
 }
 
 ion-input {
   color: white;
 }
+
+
+.custom-input ion-item {
+  --background: transparent; /* Elimina el fondo negro */
+  --ion-item-background: transparent; /* Configura el fondo como transparente */
+  border-radius: 8px; /* Opcional: bordes redondeados */
+  margin-bottom: 15px; /* Espaciado entre los inputs */
+  box-shadow: none; /* Elimina cualquier sombra */
+  --padding-start: 16px; /* Espaciado interno (opcional) */
+}
+
+.custom-input ion-input {
+  --background: transparent; /* Fondo transparente */
+  --placeholder-color: #bbbbbb; /* Color del placeholder */
+  color: white; /* Color del texto */
+}
+
+.custom-input ion-label {
+  color: #bbbbbb; /* Ajusta el color del label */
+}
+
 
 .next-button,
 .prev-button,
@@ -89,6 +119,7 @@ ion-input {
   font-size: 12px;
   color: #ffffff;
   margin-top: 20px;
+  text-align: center;
 }
 
 .terms-link {
