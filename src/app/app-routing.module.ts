@@ -62,6 +62,10 @@ const routes: Routes = [
     loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule),
     canActivate: [OnboardingGuard]
   },
+  {
+    path: 'recursos',
+    loadChildren: () => import('./recursos/recursos.module').then( m => m.RecursosPageModule)
+  },
 ];
 
 @NgModule({
