@@ -66,6 +66,14 @@ const routes: Routes = [
     path: 'recursos',
     loadChildren: () => import('./recursos/recursos.module').then( m => m.RecursosPageModule)
   },
+  {
+    path: 'tips-enf-renal',
+    loadChildren: () => import('./tips-enf-renal/tips-enf-renal.module').then( m => m.TipsEnfRenalPageModule)
+  },
+  {
+    path: 'tips-hipotiroidismo',
+    loadChildren: () => import('./tips-hipotiroidismo/tips-hipotiroidismo.module').then( m => m.TipsHipotiroidismoPageModule)
+  },
 ];
 
 @NgModule({
