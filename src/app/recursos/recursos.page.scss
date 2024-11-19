@@ -11,7 +11,57 @@
   h2{
     margin-top: 41px;
     font-size: 21px;
+    margin-bottom: 3px;.header-title {
+    text-align: center;
+    margin: 16px;
+    padding: 8px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+
+  h2{
+    margin-top: 41px;
+    font-size: 21px;
     margin-bottom: 3px;
+    font-weight: bold;
+  }
+
+ion-button{
+
+    width: 100%;
+    max-width: 300px;
+    --background: #d3b3ff;
+    --border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: none;
+    margin: 0;
+    padding: 8px;
+}
+
+ion-card {
+    background-color: #ffffff; /* Fondo blanco */
+    color: #000000; /* Color de texto en negro */
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    margin: 16px;
+  }
+  
+  ion-card-title {
+    color: #000000; /* Título en negro */
+    font-weight: bold; /* Negrita */
+    font-size: 1.4rem; /* Tamaño del título */
+    margin-bottom: 8px;
+  }
+  
+  ion-card-subtitle {
+    color: #000000; /* Subtítulo en negro */
+    font-size: 1rem; /* Tamaño del subtítulo */
+    font-weight: 500; /* Peso del subtítulo */
+    margin-bottom: 16px;
+  }
   }
 
 ion-button{
