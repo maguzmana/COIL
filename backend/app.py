@@ -91,7 +91,7 @@ def register():
     
     required_fields = [
         'username', 'password', 'full_name', 'weight', 'height', 
-        'age', 'gender', 'goal', 'physical_activityLevel', 'health_conditions'
+        'age', 'gender', 'goal', 'physical_activity_level', 'health_conditions'
     ]
     for field in required_fields:
         if field not in data or not data[field]:
