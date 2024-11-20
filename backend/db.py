@@ -1,5 +1,3 @@
-""" db.py """
-
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
@@ -8,6 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 # Cargar variables de entorno
 load_dotenv()
+
 # Configuración de la base de datos
 DATABASE_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 
@@ -21,9 +20,6 @@ engine = create_engine(
     pool_recycle=1800
 )
 
-# Crear el motor de SQLAlchemy
-engine = create_engine(DATABASE_URL, echo=True)
-
 # Crear una fábrica de sesiones
 session_factory = sessionmaker(bind=engine)
 
@@ -35,7 +31,6 @@ Base = declarative_base()
 Base.query = db_session.query_property()
 
 def init_db():
-    # Importar todos los módulos que contienen modelos aquí
     import models
     Base.metadata.create_all(bind=engine)
 

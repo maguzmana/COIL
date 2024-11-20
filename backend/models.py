@@ -37,7 +37,7 @@ class User(Base):
     gender = Column(String(10), nullable=False)
     goal = Column(Enum(GoalEnum), nullable=False)  # Usando Enum para goal
     physical_activity_level = Column(Enum(ActivityLevelEnum), nullable=False)  # Nuevo Enum para activity level
-    health_conditions = Column(Enum(HealthConditionEnum), nullable=True)  # Usando Enum para health conditions
+    health_conditions = Column(Enum(HealthConditionEnum), nullable=False)  # Usando Enum para health conditions
 
     activities = relationship("Activity", back_populates="user")
     meals = relationship("Meal", back_populates="user")

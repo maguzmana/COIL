@@ -1,4 +1,4 @@
-
+<!-- register.page.html -->
 
 <ion-content>
   <div class="form-container">
@@ -6,7 +6,6 @@
         <ion-card-subtitle>Crea una cuenta para continuar</ion-card-subtitle>
       <ion-icon name="person-circle-outline" class="icon"></ion-icon>
     </div>
-
     <form (ngSubmit)="onRegister()">
       <div *ngIf="currentStep === 1">
         <ion-item class="custom-input">
@@ -21,10 +20,8 @@
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input type="password" [(ngModel)]="registerForm.password" name="password" required></ion-input>
         </ion-item>
-
         <ion-button expand="block" class="next-button" (click)="nextStep()">Siguiente</ion-button>
       </div>
-
       <div *ngIf="currentStep === 2">
         <ion-item class="custom-input">
           <ion-label position="floating">Peso (kg)</ion-label>
@@ -45,8 +42,6 @@
             <ion-select-option value="female">Femenino</ion-select-option>
           </ion-select>
         </ion-item>
-
-        <!-- Objetivo -->
         <ion-item class="custom-input">
           <ion-label position="floating">Objetivo</ion-label>
           <ion-select [(ngModel)]="registerForm.goal" name="goal" required>
@@ -55,8 +50,6 @@
             <ion-select-option value="maintain_shape">Mantenerse en forma</ion-select-option>
           </ion-select>
         </ion-item>
-
-        <!-- Nivel de Actividad Física -->
         <ion-item class="custom-input">
           <ion-label position="floating">Nivel de Actividad Física</ion-label>
           <ion-select [(ngModel)]="registerForm.physical_activity_level" name="physical_activity_level" required>
@@ -65,8 +58,6 @@
             <ion-select-option value="3">Alto</ion-select-option>
           </ion-select>
         </ion-item>
-
-        <!-- Condiciones de salud -->
         <ion-item class="custom-input">
           <ion-label position="floating">Condiciones de Salud</ion-label>
           <ion-select [(ngModel)]="registerForm.health_conditions" name="health_conditions" required>
@@ -76,19 +67,15 @@
             <ion-select-option value="none">Ninguna</ion-select-option>
           </ion-select>
         </ion-item>
-
         <ion-button expand="block" class="prev-button" (click)="prevStep()">Anterior</ion-button>
         <ion-button expand="block" type="submit" class="submit-button">Registrar</ion-button>
       </div>
     </form>
-
     <p class="terms-text">
       Al continuar, aceptas los <span class="terms-link">términos de uso</span> y la <span class="terms-link">política de privacidad</span>.
     </p>
-
     <p class="login-text">
       ¿Ya tienes una cuenta? <a routerLink="/login" class="login-link">Iniciar sesión</a>
     </p>
-
   </div>
 </ion-content>
