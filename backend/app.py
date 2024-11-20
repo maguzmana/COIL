@@ -97,6 +97,14 @@ def register():
         if field not in data or not data[field]:
             logging.error(f'Campo faltante o vacío: {field}')
             return jsonify({'message': f'{field} es requerido y no puede estar vacío'}), 400
+        
+    # Mapeo del nivel de actividad física
+    activity_level_map = {
+        '1': 'low',
+        '2': 'medium',
+        '3': 'high'
+    }
+    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], 'low')    
 
     username = data['username']
     password = data['password']
