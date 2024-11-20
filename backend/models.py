@@ -12,10 +12,10 @@ class GoalEnum(PyEnum):
     gain_muscle = 'Gain Muscle'
     health_maintenance = 'Health Maintenance'
 
-class ActivityLevelEnum(PyEnum):  # Enum para el nivel de actividad física
-    low = 'Low'
-    medium = 'Medium'
-    high = 'High'
+class ActivityLevelEnum(PyEnum):
+    low = 'low'
+    medium = 'medium'
+    high = 'high'
 
 class HealthConditionEnum(PyEnum):
     diabetes = 'Diabetes'
@@ -25,19 +25,17 @@ class HealthConditionEnum(PyEnum):
 # Modelo User
 class User(Base):
     __tablename__ = 'users'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    full_name = Column(String(100), nullable=False)
-    username = Column(String(50), unique=True, nullable=False)
-    password_hash = Column(String(255), nullable=False)  # Solo guardamos el hash
-
-    weight = Column(Float, nullable=False)
-    height = Column(Float, nullable=False)
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+    full_name = Column(String, nullable=False)
+    weight = Column(Integer, nullable=False)
+    height = Column(Integer, nullable=False)
     age = Column(Integer, nullable=False)
-    gender = Column(String(10), nullable=False)
-    goal = Column(Enum(GoalEnum), nullable=False)  # Usando Enum para goal
-    physical_activity_level = Column(Enum(ActivityLevelEnum), nullable=False)  # Nuevo Enum para activity level
-    health_conditions = Column(Enum(HealthConditionEnum), nullable=False)  # Usando Enum para health conditions
+    gender = Column(String, nullable=False)
+    goal = Column(String, nullable=False)
+    physical_activity_level = Column(Enum(ActivityLevelEnum), nullable=False)
+    health_conditions = Column(String, nullable=True)  # Usando Enum para health conditions
 
     activities = relationship("Activity", back_populates="user")
     meals = relationship("Meal", back_populates="user")

@@ -98,13 +98,12 @@ def register():
             logging.error(f'Campo faltante o vacío: {field}')
             return jsonify({'message': f'{field} es requerido y no puede estar vacío'}), 400
         
-    # Mapeo del nivel de actividad física
     activity_level_map = {
-        'low': 'Low',
-        'medium': 'Medium',
-        'high': 'High'
+        '1': 'low',
+        '2': 'medium',
+        '3': 'high'
     }
-    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], 'Low')    
+    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], 'low')    
 
     username = data['username']
     password = data['password']
@@ -117,17 +116,16 @@ def register():
         if existing_user:
             return jsonify({'message': 'El nombre de usuario ya existe'}), 400
 
-        # Remove the line since "hashed_password" is not being used
         new_user = User(
-        full_name=data['full_name'],
-        username=data['username'],
-        weight=data['weight'],
-        height=data['height'],
-        age=data['age'],
-        gender=data['gender'],
-        goal=data['goal'],
-        physical_activity_level=int(data['physical_activity_level']),  # Asegurarse de que sea un entero
-        health_conditions=data['health_conditions'] if data['health_conditions'] != 'none' else None
+            full_name=data['full_name'],
+            username=data['username'],
+            weight=data['weight'],
+            height=data['height'],
+            age=data['age'],
+            gender=data['gender'],
+            goal=data['goal'],
+            physical_activity_level=data['physical_activity_level'],
+            health_conditions=data['health_conditions'] if data['health_conditions'] != 'none' else None
         )
         new_user.set_password(data['password'])
         db.add(new_user)
