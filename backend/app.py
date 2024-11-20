@@ -100,11 +100,11 @@ def register():
         
     # Mapeo del nivel de actividad física
     activity_level_map = {
-        'low': '1',
-        'medium': '2',
-        'high': '3'
+        'low': 'Low',
+        'medium': 'Medium',
+        'high': 'High'
     }
-    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], '1')    
+    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], 'Low')    
 
     username = data['username']
     password = data['password']
