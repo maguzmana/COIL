@@ -10,8 +10,8 @@ import logging
 from functools import wraps
 import bcrypt
 from dotenv import load_dotenv
-from db import get_db_session, close_db_session, init_db, User
-
+from db import get_db_session, close_db_session, init_db, User, engine
+from sqlalchemy import text
 
 # Configurar logging
 logging.basicConfig(level=logging.DEBUG)
@@ -149,9 +149,6 @@ def register():
         return jsonify({'error': 'Error interno del servidor'}), 500
     finally:
         db.close()
-
-from db import engine
-from sqlalchemy import text
 
 @app.route('/test-db', methods=['GET'])
 def test_db():

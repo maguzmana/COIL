@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey, Date, Float, E
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 import bcrypt
+from werkzeug.security import generate_password_hash
 from enum import Enum as PyEnum
 
 Base = declarative_base()
@@ -41,10 +42,7 @@ class User(Base):
     meals = relationship("Meal", back_populates="user")
 
     def set_password(self, password):
-        """Método para encriptar la contraseña"""
-        password_bytes = password.encode('utf-8')
-        salt = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(password_bytes, salt).decode('utf-8')
+        self.password = generate_password_hash(password)
 
     def check_password(self, password):
         """Método para verificar la contraseña"""
