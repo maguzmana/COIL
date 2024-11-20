@@ -104,7 +104,7 @@ def register():
         'medium': '2',
         'high': '3'
     }
-    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], 'low')    
+    data['physical_activity_level'] = activity_level_map.get(data['physical_activity_level'], '1')    
 
     username = data['username']
     password = data['password']
