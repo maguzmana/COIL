@@ -5,8 +5,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { OnboardingGuard } from './services/onboarding.guard';
 import { Tab3PageModule } from './tab3/tab3.module';
-import { RecetasPage } from './recetas/recetas.page';
-import { EjerciciosPage } from './ejercicios/ejercicios.page';
 
 const routes: Routes = [
   {
@@ -49,10 +47,12 @@ const routes: Routes = [
     loadChildren: () => import('./detalle-register/detalle-register.module').then( m => m.DetalleRegisterPageModule)
   },
   { 
-    path: 'recetas', component: RecetasPage
+    path: 'recetas', 
+    loadChildren: () => import('./recetas/recetas.module').then( m => m.RecetasPageModule)
    },
   {
-    path: 'ejercicios', component: EjerciciosPage
+    path: 'ejercicios', 
+    loadChildren: () => import('./ejercicios/ejercicios.module').then( m => m.EjerciciosPageModule)
   },   {
     path: 'desafios',
     loadChildren: () => import('./desafios/desafios.module').then( m => m.DesafiosPageModule)
